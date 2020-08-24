@@ -1,0 +1,30 @@
+Admin
+Dashboard (Jumlah pendidik, Jumlah kependidikan, Jumlah Jurusan)
+Administrasi (CRUD)
+News (CRUD)
+Informasi Slide (CRUD)
+Perpustakaan (CRUD)
+Struktur Organisasi (CRUD)
+Tenaga Pendidik (CRUD)
+Tenaga Kependidikan (CRUD)
+Jurusan (CRUD)
+Pengembangan Diri/Ekskul (CRUD)
+Data Siswa (HOLD)
+Mitra Industri (CRUD)
+PKL (RUD, Download Excel)
+BKK (HOLD)
+Alumni (HOLD)
+
+Guru
+Dashboard (Jumlah pendidik, Jumlah kependidikan, Jumlah Jurusan)
+News (CR)
+Perpustakaan (CRUD)
+Jurusan (CRUD)
+Pengembangan Diri/Ekskul (CRUD)
+
+Siswa
+Dashboard (Selamat Datang)
+Penilaian (R)
+PKL (CR)
+Perpustakaan (R, Download)
+
