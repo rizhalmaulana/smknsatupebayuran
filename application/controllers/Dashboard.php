@@ -1,16 +1,18 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller{
+class Dashboard extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('profilmodel');
     }
 
-    public function index(){
-
-        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' => 
+    public function index()
+    {
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $data['judul'] = "Dashboard | SMKN 1 PEBAYURAN";
 
@@ -23,8 +25,14 @@ class Dashboard extends CI_Controller{
         $this->load->view('primary/footer');
     }
 
-    public function profil(){
-        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' => 
+    public function profil()
+    {
+        $data = array(
+            'data_struktur' => $this->profilmodel->get_profil_struktur(),
+            'data_pendidik' => $this->profilmodel->get_profil_tenaga_pendidik(),
+            'data_kependidikan' => $this->profilmodel->get_profil_tenaga_kependidikan()
+        );
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $data['judul'] = "Profil Master | SMKN 1 PEBAYURAN";
 
@@ -37,8 +45,9 @@ class Dashboard extends CI_Controller{
         $this->load->view('main/footer');
     }
 
-    public function hubin(){
-        $hubin['user'] = $this->db->get_where('pebayuran_admin', ['email' => 
+    public function hubin()
+    {
+        $hubin['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $hubin['judul'] = "Hubin Master | SMKN 1 PEBAYURAN";
 
@@ -49,11 +58,11 @@ class Dashboard extends CI_Controller{
         $this->load->view('main/mobile');
         $this->load->view('dashboard/hubin', $hubin);
         $this->load->view('main/footer');
-
     }
 
-    public function news(){
-        $news['user'] = $this->db->get_where('pebayuran_admin', ['email' => 
+    public function news()
+    {
+        $news['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $news['judul'] = "News Master | SMKN 1 PEBAYURAN";
 
@@ -64,11 +73,11 @@ class Dashboard extends CI_Controller{
         $this->load->view('main/mobile');
         $this->load->view('dashboard/news', $news);
         $this->load->view('main/footer');
-
     }
 
-    public function kurikulum(){
-        $kurikulum['user'] = $this->db->get_where('pebayuran_admin', ['email' => 
+    public function kurikulum()
+    {
+        $kurikulum['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $kurikulum['judul'] = "Kurikulum Master | SMKN 1 PEBAYURAN";
 
@@ -79,11 +88,11 @@ class Dashboard extends CI_Controller{
         $this->load->view('main/mobile');
         $this->load->view('dashboard/kurikulum', $kurikulum);
         $this->load->view('main/footer');
-        
     }
 
-    public function kesiswaan(){
-        $ekskul['user'] = $this->db->get_where('pebayuran_admin', ['email' => 
+    public function kesiswaan()
+    {
+        $ekskul['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $ekskul['judul'] = "Ekskul Master | SMKN 1 PEBAYURAN";
 
@@ -94,10 +103,10 @@ class Dashboard extends CI_Controller{
         $this->load->view('main/mobile');
         $this->load->view('dashboard/kesiswaan', $ekskul);
         $this->load->view('main/footer');
-
     }
 
-    public function insert_identitas(){
+    public function insert_identitas()
+    {
         $gambar     = $_POST['file_gambar'];
         $sejarah    = $_POST['sejarah'];
         $visi       = $_POST['visi'];
@@ -111,26 +120,27 @@ class Dashboard extends CI_Controller{
         );
         $res = $this->profilmodel->InsertData('profil_identitas_sekolah', $data_insert);
         if ($res >= 1) {
-            ?>
+?>
             <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
+                alert("Berhasil! Data Berhasil Di input!");
+                document.location.href = "../dashboard/profil";
             </script>
-            <?php
+        <?php
         }
     }
 
-    public function insert_struktur(){
+    public function insert_struktur()
+    {
         $nip            = $_POST['nipStruktur'];
         $nama           = $_POST['namaStruktur'];
         $tempatLahir    = $_POST['tempatLahirStruktur'];
         $tanggalLahir   = $_POST['tanggalLahirStruktur'];
         $kelamin        = $_POST['jenis_kelamin'];
         $jabatan        = $_POST['jabatanStruktur'];
-        
-        if($kelamin == "L"){
+
+        if ($kelamin == "L") {
             $jenisKelamin = "Laki - laki";
-        }else{
+        } else {
             $jenisKelamin = "Perempuan";
         }
 
@@ -145,26 +155,27 @@ class Dashboard extends CI_Controller{
         );
         $res = $this->profilmodel->InsertData('profil_struktur_organisasi', $data_insert);
         if ($res >= 1) {
-            ?>
+        ?>
             <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
+                alert("Berhasil! Data Berhasil Di input!");
+                document.location.href = "../dashboard/profil";
             </script>
-            <?php
+        <?php
         }
     }
 
-    public function insert_pendidik(){
+    public function insert_pendidik()
+    {
         $nip            = $_POST['nipPendidik'];
         $nama           = $_POST['namaPendidik'];
         $tempatLahir    = $_POST['tempatLahirPendidik'];
         $tanggalLahir   = $_POST['tanggalLahirPendidik'];
         $kelamin        = $_POST['jenisKelamin'];
         $jabatan        = $_POST['jabatanPendidik'];
-        
-        if($kelamin == "L"){
+
+        if ($kelamin == "L") {
             $jenisKelamin = "Laki - laki";
-        }else{
+        } else {
             $jenisKelamin = "Perempuan";
         }
 
@@ -179,26 +190,27 @@ class Dashboard extends CI_Controller{
         );
         $res = $this->profilmodel->InsertData('profil_tenaga_pendidik', $data_insert);
         if ($res >= 1) {
-            ?>
+        ?>
             <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
+                alert("Berhasil! Data Berhasil Di input!");
+                document.location.href = "../dashboard/profil";
             </script>
-            <?php
+        <?php
         }
     }
 
-    public function insert_kependidikan(){
+    public function insert_kependidikan()
+    {
         $nip            = $_POST['nipKependidikan'];
         $nama           = $_POST['namaKependidikan'];
         $tempatLahir    = $_POST['tempatLahirKependidikan'];
         $tanggalLahir   = $_POST['tanggalLahirKependidikan'];
         $kelamin        = $_POST['jenisKelamin'];
         $jabatan        = $_POST['jabatanKependidikan'];
-        
-        if($kelamin == "L"){
+
+        if ($kelamin == "L") {
             $jenisKelamin = "Laki - laki";
-        }else{
+        } else {
             $jenisKelamin = "Perempuan";
         }
 
@@ -213,20 +225,21 @@ class Dashboard extends CI_Controller{
         );
         $res = $this->profilmodel->InsertData('profil_tenaga_kependidikan', $data_insert);
         if ($res >= 1) {
-            ?>
+        ?>
             <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
+                alert("Berhasil! Data Berhasil Di input!");
+                document.location.href = "../dashboard/profil";
             </script>
-            <?php
+        <?php
         }
     }
 
-    public function insert_hubin(){
+    public function insert_hubin()
+    {
         $gambar     = $_POST['gambarPerusahaan'];
         $nama       = $_POST['namaPerusahaan'];
         $tentang    = $_POST['tentangPerusahaan'];
-    
+
         $data_insert = array(
             'id' => '',
             'gambar' => $gambar,
@@ -235,12 +248,12 @@ class Dashboard extends CI_Controller{
         );
         $res = $this->profilmodel->InsertData('hubin_mitra_industri', $data_insert);
         if ($res >= 1) {
-            ?>
+        ?>
             <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/hubin";
+                alert("Berhasil! Data Berhasil Di input!");
+                document.location.href = "../dashboard/hubin";
             </script>
-            <?php
+<?php
         }
     }
 }

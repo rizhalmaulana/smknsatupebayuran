@@ -19,7 +19,7 @@
                                 <div class="panel-heading">
                                     <h4>Form Master Identitas Sekolah</h4>
                                 </div>
-                                <form method="POST" action="<?=base_url() . "dashboard/insert_identitas";?>">
+                                <form method="POST" action="<?= base_url() . "dashboard/insert_identitas"; ?>">
                                     <div class="panel-body" style="padding-bottom:30px;">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -31,32 +31,28 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Sejarah Sekolah</label>
                                                 <div class="col-sm-10">
-                                                    <textarea name="sejarah" rows="10" cols="30"
-                                                        class="form-control"></textarea>
+                                                    <textarea name="sejarah" rows="10" cols="30" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Visi</label>
                                                 <div class="col-sm-10">
                                                     <br>
-                                                    <textarea name="visi" rows="10" cols="30"
-                                                        class="form-control"></textarea>
+                                                    <textarea name="visi" rows="10" cols="30" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Misi</label>
                                                 <div class="col-sm-10">
                                                     <br>
-                                                    <textarea name="misi" rows="10" cols="30"
-                                                        class="form-control"></textarea>
+                                                    <textarea name="misi" rows="10" cols="30" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="panel-body">
                                             <div class="col-md-12">
                                                 <br>
-                                                <button type="submit" name="btnSubmit" value="Simpan"
-                                                    class="btn ripple btn-3d btn-primary form-control">
+                                                <button type="submit" name="btnSubmit" value="Simpan" class="btn ripple btn-3d btn-primary form-control">
                                                     <div>
                                                         <span>Submit</span>
                                                     </div>
@@ -86,9 +82,7 @@
                                                 <div class="panel">
                                                     <div class="panel-body">
                                                         <div class="responsive-table">
-                                                            <table id="datatables-example"
-                                                                class="table table-striped table-bordered" width="100%"
-                                                                cellspacing="0">
+                                                            <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                                                                 <thead>
                                                                     <tr>
                                                                         <th class="text-center">No</th>
@@ -102,23 +96,25 @@
                                                                     </tr>
                                                                     </th>
                                                                 <tbody class="text-center">
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>Untung Waluyo, S.Pd.Kn., M.Si</td>
-                                                                        <td>Bandung</td>
-                                                                        <td>06 September 1963</td>
-                                                                        <td>Laki-laki</td>
-                                                                        <td>196309061988031007</td>
-                                                                        <td>Kepala Sekolah</td>
-                                                                        <td>
-                                                                            <div class="col-md-12">
-                                                                                <input class="submit btn btn-success"
-                                                                                    type="submit" value="Edit">
-                                                                                <input class="submit btn btn-danger"
-                                                                                    type="submit" value="Hapus">
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
+                                                                    <?php
+                                                                    $no = 1;
+                                                                    foreach ($data_struktur as $struktur) { ?>
+                                                                        <tr>
+                                                                            <td><?= $no++; ?></td>
+                                                                            <td><?= $struktur->nama_struktur; ?></td>
+                                                                            <td><?= $struktur->tempat_lahir; ?></td>
+                                                                            <td><?= $struktur->tanggal_lahir; ?></td>
+                                                                            <td><?= $struktur->jenis_kelamin; ?></td>
+                                                                            <td><?= $struktur->nip; ?></td>
+                                                                            <td><?= $struktur->jabatan; ?></td>
+                                                                            <td>
+                                                                                <div class="col-md-12">
+                                                                                    <input class="submit btn btn-success" type="submit" value="Edit">
+                                                                                    <input class="submit btn btn-danger" type="submit" value="Hapus">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php } ?>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -129,75 +125,71 @@
                                     </div>
 
                                     <!-- Tabel Input Struktur -->
-                                    <form method="POST" action="<?=base_url() . "dashboard/insert_struktur";?>">
-                                    <div class="form-element">
-                                        <div class="col-md-12 padding-0">
-                                            <div class="col-md-12">
-                                                <div class=" form-element-padding">
-                                                    <div class="panel-body" style="padding-bottom:30px;">
-                                                        <div class="col-md-12">
-                                                        <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">NIP</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="nipStruktur">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">Nama</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="namaStruktur">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tempat Lahir</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="tempatLahirStruktur">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tanggal Lahir</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="date" class="form-control" name="tanggalLahirStruktur">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Jenis
-                                                                    Kelamin</label>
-                                                                <div class="col-sm-10">
-                                                                    <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="jenis_kelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="L") echo "checked";?>> Laki - laki
-                                                                    </div>
-                                                                    <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="jenis_kelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="P") echo "checked";?>> Perempuan
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">Jabatan</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="jabatanStruktur">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel-body">
+                                    <form method="POST" action="<?= base_url() . "dashboard/insert_struktur"; ?>">
+                                        <div class="form-element">
+                                            <div class="col-md-12 padding-0">
+                                                <div class="col-md-12">
+                                                    <div class=" form-element-padding">
+                                                        <div class="panel-body" style="padding-bottom:30px;">
                                                             <div class="col-md-12">
-                                                                <br>
-                                                                <button
-                                                                    class="btn ripple btn-3d btn-primary form-control">
-                                                                    <div>
-                                                                        <span>Submit</span>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">NIP</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="nipStruktur">
                                                                     </div>
-                                                                </button>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Nama</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="namaStruktur">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Tempat Lahir</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="tempatLahirStruktur">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Tanggal Lahir</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="date" class="form-control" name="tanggalLahirStruktur">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Jenis
+                                                                        Kelamin</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="col-sm-12 padding-0">
+                                                                            <input type="radio" name="jenis_kelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == "L") echo "checked"; ?>> Laki - laki
+                                                                        </div>
+                                                                        <div class="col-sm-12 padding-0">
+                                                                            <input type="radio" name="jenis_kelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == "P") echo "checked"; ?>> Perempuan
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Jabatan</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="jabatanStruktur">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="col-md-12">
+                                                                    <br>
+                                                                    <button class="btn ripple btn-3d btn-primary form-control">
+                                                                        <div>
+                                                                            <span>Submit</span>
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </form>
                                     <!-- Tabel Input Struktur -->
                                 </div>
@@ -222,9 +214,7 @@
                                                 <div class="panel">
                                                     <div class="panel-body">
                                                         <div class="responsive-table">
-                                                            <table id="datatables-example"
-                                                                class="table table-striped table-bordered" width="100%"
-                                                                cellspacing="0">
+                                                            <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                                                                 <thead>
                                                                     <tr>
                                                                         <th class="text-center">No</th>
@@ -238,23 +228,39 @@
                                                                     </tr>
                                                                     </th>
                                                                 <tbody class="text-center">
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>Untung Waluyo, S.Pd.Kn., M.Si</td>
-                                                                        <td>Bandung</td>
-                                                                        <td>06 September 1963</td>
-                                                                        <td>Laki-laki</td>
-                                                                        <td>196309061988031007</td>
-                                                                        <td>Kepala Sekolah</td>
-                                                                        <td>
-                                                                            <div class="col-md-12">
-                                                                                <input class="submit btn btn-success"
-                                                                                    type="submit" value="Edit">
-                                                                                <input class="submit btn btn-danger"
-                                                                                    type="submit" value="Hapus">
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
+                                                                    <?php
+                                                                    $no = 1;
+                                                                    foreach ($data_pendidik as $pendidik) { ?>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <?= $no++; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= $pendidik->nama_pendidik; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= $pendidik->tempat_lahir; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= $pendidik->tanggal_lahir; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= $pendidik->jenis_kelamin; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= $pendidik->nip; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?= $pendidik->jabatan; ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="col-md-12">
+                                                                                    <input class="submit btn btn-success" type="submit" value="Edit">
+                                                                                    <input class="submit btn btn-danger" type="submit" value="Hapus">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php } ?>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -265,77 +271,73 @@
                                     </div>
 
                                     <!-- Tabel Input Pendidik -->
-                                    <form method="POST" action="<?=base_url() . "dashboard/insert_pendidik";?>">
-                                    <div class="form-element">
-                                        <div class="col-md-12 padding-0">
-                                            <div class="col-md-12">
-                                                <div class=" form-element-padding">
-                                                    <div class="panel-body" style="padding-bottom:30px;">
-                                                        <div class="col-md-12">
-                                                        <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">NIP</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="nipPendidik">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">Nama</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="namaPendidik">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tempat
-                                                                    Lahir</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="tempatLahirPendidik">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tanggal
-                                                                    Lahir</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="date" class="form-control" name="tanggalLahirPendidik">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Jenis
-                                                                    Kelamin</label>
-                                                                <div class="col-sm-10">
-                                                                    <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="jenisKelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="L") echo "checked";?>> Laki - laki
-                                                                    </div>
-                                                                    <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="jenisKelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="P") echo "checked";?>> Perempuan
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">Jabatan</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="jabatanPendidik">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel-body">
+                                    <form method="POST" action="<?= base_url() . "dashboard/insert_pendidik"; ?>">
+                                        <div class="form-element">
+                                            <div class="col-md-12 padding-0">
+                                                <div class="col-md-12">
+                                                    <div class=" form-element-padding">
+                                                        <div class="panel-body" style="padding-bottom:30px;">
                                                             <div class="col-md-12">
-                                                                <br>
-                                                                <button
-                                                                    class="btn ripple btn-3d btn-primary form-control">
-                                                                    <div>
-                                                                        <span>Submit</span>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">NIP</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="nipPendidik">
                                                                     </div>
-                                                                </button>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Nama</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="namaPendidik">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Tempat
+                                                                        Lahir</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="tempatLahirPendidik">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Tanggal
+                                                                        Lahir</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="date" class="form-control" name="tanggalLahirPendidik">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Jenis
+                                                                        Kelamin</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="col-sm-12 padding-0">
+                                                                            <input type="radio" name="jenisKelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == "L") echo "checked"; ?>> Laki - laki
+                                                                        </div>
+                                                                        <div class="col-sm-12 padding-0">
+                                                                            <input type="radio" name="jenisKelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == "P") echo "checked"; ?>> Perempuan
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Jabatan</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="jabatanPendidik">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="col-md-12">
+                                                                    <br>
+                                                                    <button class="btn ripple btn-3d btn-primary form-control">
+                                                                        <div>
+                                                                            <span>Submit</span>
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </form>
                                     <!-- Tabel Input Pendidik -->
                                 </div>
@@ -360,9 +362,7 @@
                                                 <div class="panel">
                                                     <div class="panel-body">
                                                         <div class="responsive-table">
-                                                            <table id="datatables-example"
-                                                                class="table table-striped table-bordered" width="100%"
-                                                                cellspacing="0">
+                                                            <table id="datatables-example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                                                                 <thead>
                                                                     <tr>
                                                                         <th class="text-center">No</th>
@@ -376,23 +376,25 @@
                                                                     </tr>
                                                                     </th>
                                                                 <tbody class="text-center">
-                                                                    <tr>
-                                                                        <td>1</td>
-                                                                        <td>Untung Waluyo, S.Pd.Kn., M.Si</td>
-                                                                        <td>Bandung</td>
-                                                                        <td>06 September 1963</td>
-                                                                        <td>Laki-laki</td>
-                                                                        <td>196309061988031007</td>
-                                                                        <td>Kepala Sekolah</td>
-                                                                        <td>
-                                                                            <div class="col-md-12">
-                                                                                <input class="submit btn btn-success"
-                                                                                    type="submit" value="Edit">
-                                                                                <input class="submit btn btn-danger"
-                                                                                    type="submit" value="Hapus">
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
+                                                                    <?php
+                                                                    $no = 1;
+                                                                    foreach ($data_kependidikan as $kependidikan) { ?>
+                                                                        <tr>
+                                                                            <td><?= $no++; ?></td>
+                                                                            <td><?= $kependidikan->nama_pendidik; ?></td>
+                                                                            <td><?= $kependidikan->tempat_lahir; ?></td>
+                                                                            <td><?= $kependidikan->tanggal_lahir; ?></td>
+                                                                            <td><?= $kependidikan->jenis_kelamin; ?></td>
+                                                                            <td><?= $kependidikan->nip; ?></td>
+                                                                            <td><?= $kependidikan->jabatan; ?></td>
+                                                                            <td>
+                                                                                <div class="col-md-12">
+                                                                                    <input class="submit btn btn-success" type="submit" value="Edit">
+                                                                                    <input class="submit btn btn-danger" type="submit" value="Hapus">
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php } ?>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -403,77 +405,73 @@
                                     </div>
 
                                     <!-- Tabel Input Kependidikan -->
-                                    <form method="POST" action="<?=base_url() . "dashboard/insert_kependidikan";?>">
-                                    <div class="form-element">
-                                        <div class="col-md-12 padding-0">
-                                            <div class="col-md-12">
-                                                <div class=" form-element-padding">
-                                                    <div class="panel-body" style="padding-bottom:30px;">
-                                                        <div class="col-md-12">
-                                                        <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">NIP</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="nipKependidikan">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">Nama</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="namaKependidikan">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tempat
-                                                                    Lahir</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="tempatLahirKependidikan">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tanggal
-                                                                    Lahir</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="date" class="form-control" name="tanggalLahirKependidikan">
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Jenis
-                                                                    Kelamin</label>
-                                                                <div class="col-sm-10">
-                                                                    <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="jenisKelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="L") echo "checked";?>> Laki - laki
-                                                                    </div>
-                                                                    <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="jenisKelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="P") echo "checked";?>> Perempuan
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">Jabatan</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control" name="jabatanKependidikan">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel-body">
+                                    <form method="POST" action="<?= base_url() . "dashboard/insert_kependidikan"; ?>">
+                                        <div class="form-element">
+                                            <div class="col-md-12 padding-0">
+                                                <div class="col-md-12">
+                                                    <div class=" form-element-padding">
+                                                        <div class="panel-body" style="padding-bottom:30px;">
                                                             <div class="col-md-12">
-                                                                <br>
-                                                                <button
-                                                                    class="btn ripple btn-3d btn-primary form-control">
-                                                                    <div>
-                                                                        <span>Submit</span>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">NIP</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="nipKependidikan">
                                                                     </div>
-                                                                </button>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Nama</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="namaKependidikan">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Tempat
+                                                                        Lahir</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="tempatLahirKependidikan">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Tanggal
+                                                                        Lahir</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="date" class="form-control" name="tanggalLahirKependidikan">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Jenis
+                                                                        Kelamin</label>
+                                                                    <div class="col-sm-10">
+                                                                        <div class="col-sm-12 padding-0">
+                                                                            <input type="radio" name="jenisKelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == "L") echo "checked"; ?>> Laki - laki
+                                                                        </div>
+                                                                        <div class="col-sm-12 padding-0">
+                                                                            <input type="radio" name="jenisKelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin'] == "P") echo "checked"; ?>> Perempuan
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Jabatan</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="jabatanKependidikan">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="col-md-12">
+                                                                    <br>
+                                                                    <button class="btn ripple btn-3d btn-primary form-control">
+                                                                        <div>
+                                                                            <span>Submit</span>
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </form>
                                     <!-- Tabel Input Kependidikan -->
                                 </div>
