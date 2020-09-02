@@ -129,31 +129,37 @@
                                     </div>
 
                                     <!-- Tabel Input Struktur -->
+                                    <form method="POST" action="<?=base_url() . "dashboard/insert_struktur";?>">
                                     <div class="form-element">
                                         <div class="col-md-12 padding-0">
                                             <div class="col-md-12">
                                                 <div class=" form-element-padding">
                                                     <div class="panel-body" style="padding-bottom:30px;">
                                                         <div class="col-md-12">
+                                                        <div class="form-group">
+                                                                <label
+                                                                    class="col-sm-2 control-label text-right">NIP</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" name="nipStruktur">
+                                                                </div>
+                                                            </div>
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-2 control-label text-right">Nama</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="namaStruktur">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tempat
-                                                                    Lahir</label>
+                                                                <label class="col-sm-2 control-label text-right">Tempat Lahir</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="tempatLahirStruktur">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-2 control-label text-right">Tanggal
-                                                                    Lahir</label>
+                                                                <label class="col-sm-2 control-label text-right">Tanggal Lahir</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="date" class="form-control">
+                                                                    <input type="date" class="form-control" name="tanggalLahirStruktur">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -161,25 +167,18 @@
                                                                     Kelamin</label>
                                                                 <div class="col-sm-10">
                                                                     <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="option"> Laki - laki
+                                                                        <input type="radio" name="jenis_kelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="L") echo "checked";?>> Laki - laki
                                                                     </div>
                                                                     <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="option"> Perempuan
+                                                                        <input type="radio" name="jenis_kelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="P") echo "checked";?>> Perempuan
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">NIP</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-2 control-label text-right">Jabatan</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="jabatanStruktur">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -199,6 +198,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
                                     <!-- Tabel Input Struktur -->
                                 </div>
                             </div>
@@ -265,31 +265,39 @@
                                     </div>
 
                                     <!-- Tabel Input Pendidik -->
+                                    <form method="POST" action="<?=base_url() . "dashboard/insert_pendidik";?>">
                                     <div class="form-element">
                                         <div class="col-md-12 padding-0">
                                             <div class="col-md-12">
                                                 <div class=" form-element-padding">
                                                     <div class="panel-body" style="padding-bottom:30px;">
                                                         <div class="col-md-12">
+                                                        <div class="form-group">
+                                                                <label
+                                                                    class="col-sm-2 control-label text-right">NIP</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" name="nipPendidik">
+                                                                </div>
+                                                            </div>
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-2 control-label text-right">Nama</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="namaPendidik">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 control-label text-right">Tempat
                                                                     Lahir</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="tempatLahirPendidik">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 control-label text-right">Tanggal
                                                                     Lahir</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="date" class="form-control">
+                                                                    <input type="date" class="form-control" name="tanggalLahirPendidik">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -297,25 +305,18 @@
                                                                     Kelamin</label>
                                                                 <div class="col-sm-10">
                                                                     <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="option"> Laki - laki
+                                                                        <input type="radio" name="jenisKelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="L") echo "checked";?>> Laki - laki
                                                                     </div>
                                                                     <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="option"> Perempuan
+                                                                        <input type="radio" name="jenisKelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="P") echo "checked";?>> Perempuan
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">NIP</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-2 control-label text-right">Jabatan</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="jabatanPendidik">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -335,6 +336,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
                                     <!-- Tabel Input Pendidik -->
                                 </div>
                             </div>
@@ -401,31 +403,39 @@
                                     </div>
 
                                     <!-- Tabel Input Kependidikan -->
+                                    <form method="POST" action="<?=base_url() . "dashboard/insert_kependidikan";?>">
                                     <div class="form-element">
                                         <div class="col-md-12 padding-0">
                                             <div class="col-md-12">
                                                 <div class=" form-element-padding">
                                                     <div class="panel-body" style="padding-bottom:30px;">
                                                         <div class="col-md-12">
+                                                        <div class="form-group">
+                                                                <label
+                                                                    class="col-sm-2 control-label text-right">NIP</label>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" name="nipKependidikan">
+                                                                </div>
+                                                            </div>
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-2 control-label text-right">Nama</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="namaKependidikan">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 control-label text-right">Tempat
                                                                     Lahir</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="tempatLahirKependidikan">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-2 control-label text-right">Tanggal
                                                                     Lahir</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="date" class="form-control">
+                                                                    <input type="date" class="form-control" name="tanggalLahirKependidikan">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -433,25 +443,18 @@
                                                                     Kelamin</label>
                                                                 <div class="col-sm-10">
                                                                     <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="option"> Laki - laki
+                                                                        <input type="radio" name="jenisKelamin" value="L" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="L") echo "checked";?>> Laki - laki
                                                                     </div>
                                                                     <div class="col-sm-12 padding-0">
-                                                                        <input type="radio" name="option"> Perempuan
+                                                                        <input type="radio" name="jenisKelamin" value="P" <?php if (isset($_POST['jenis_kelamin']) && $_POST['jenis_kelamin']=="P") echo "checked";?>> Perempuan
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label
-                                                                    class="col-sm-2 control-label text-right">NIP</label>
-                                                                <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-2 control-label text-right">Jabatan</label>
                                                                 <div class="col-sm-10">
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" class="form-control" name="jabatanKependidikan">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -471,6 +474,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
                                     <!-- Tabel Input Kependidikan -->
                                 </div>
                             </div>

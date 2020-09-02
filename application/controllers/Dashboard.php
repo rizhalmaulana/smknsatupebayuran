@@ -113,7 +113,7 @@ class Dashboard extends CI_Controller{
         if ($res >= 1) {
             ?>
             <script language="javascript">
-            alert("Berhasil!, Data Berhasil Di input!");
+            alert("Berhasil! Data Berhasil Di input!");
             document.location.href = "../dashboard/profil";
             </script>
             <?php
@@ -121,14 +121,126 @@ class Dashboard extends CI_Controller{
     }
 
     public function insert_struktur(){
+        $nip            = $_POST['nipStruktur'];
+        $nama           = $_POST['namaStruktur'];
+        $tempatLahir    = $_POST['tempatLahirStruktur'];
+        $tanggalLahir   = $_POST['tanggalLahirStruktur'];
+        $kelamin        = $_POST['jenis_kelamin'];
+        $jabatan        = $_POST['jabatanStruktur'];
         
+        if($kelamin == "L"){
+            $jenisKelamin = "Laki - laki";
+        }else{
+            $jenisKelamin = "Perempuan";
+        }
+
+        $data_insert = array(
+            'id' => '',
+            'nip' => $nip,
+            'nama_pendidik' => $nama,
+            'tempat_lahir' => $tempatLahir,
+            'tanggal_lahir' => $tanggalLahir,
+            'jenis_kelamin' => $jenisKelamin,
+            'jabatan' => $jabatan,
+        );
+        $res = $this->profilmodel->InsertData('profil_struktur_organisasi', $data_insert);
+        if ($res >= 1) {
+            ?>
+            <script language="javascript">
+            alert("Berhasil! Data Berhasil Di input!");
+            document.location.href = "../dashboard/profil";
+            </script>
+            <?php
+        }
     }
 
     public function insert_pendidik(){
+        $nip            = $_POST['nipPendidik'];
+        $nama           = $_POST['namaPendidik'];
+        $tempatLahir    = $_POST['tempatLahirPendidik'];
+        $tanggalLahir   = $_POST['tanggalLahirPendidik'];
+        $kelamin        = $_POST['jenisKelamin'];
+        $jabatan        = $_POST['jabatanPendidik'];
         
+        if($kelamin == "L"){
+            $jenisKelamin = "Laki - laki";
+        }else{
+            $jenisKelamin = "Perempuan";
+        }
+
+        $data_insert = array(
+            'id' => '',
+            'nip' => $nip,
+            'nama_pendidik' => $nama,
+            'tempat_lahir' => $tempatLahir,
+            'tanggal_lahir' => $tanggalLahir,
+            'jenis_kelamin' => $jenisKelamin,
+            'jabatan' => $jabatan,
+        );
+        $res = $this->profilmodel->InsertData('profil_tenaga_pendidik', $data_insert);
+        if ($res >= 1) {
+            ?>
+            <script language="javascript">
+            alert("Berhasil! Data Berhasil Di input!");
+            document.location.href = "../dashboard/profil";
+            </script>
+            <?php
+        }
     }
 
     public function insert_kependidikan(){
+        $nip            = $_POST['nipKependidikan'];
+        $nama           = $_POST['namaKependidikan'];
+        $tempatLahir    = $_POST['tempatLahirKependidikan'];
+        $tanggalLahir   = $_POST['tanggalLahirKependidikan'];
+        $kelamin        = $_POST['jenisKelamin'];
+        $jabatan        = $_POST['jabatanKependidikan'];
         
+        if($kelamin == "L"){
+            $jenisKelamin = "Laki - laki";
+        }else{
+            $jenisKelamin = "Perempuan";
+        }
+
+        $data_insert = array(
+            'id' => '',
+            'nip' => $nip,
+            'nama_pendidik' => $nama,
+            'tempat_lahir' => $tempatLahir,
+            'tanggal_lahir' => $tanggalLahir,
+            'jenis_kelamin' => $jenisKelamin,
+            'jabatan' => $jabatan,
+        );
+        $res = $this->profilmodel->InsertData('profil_tenaga_kependidikan', $data_insert);
+        if ($res >= 1) {
+            ?>
+            <script language="javascript">
+            alert("Berhasil! Data Berhasil Di input!");
+            document.location.href = "../dashboard/profil";
+            </script>
+            <?php
+        }
+    }
+
+    public function insert_hubin(){
+        $gambar     = $_POST['gambarPerusahaan'];
+        $nama       = $_POST['namaPerusahaan'];
+        $tentang    = $_POST['tentangPerusahaan'];
+    
+        $data_insert = array(
+            'id' => '',
+            'gambar' => $gambar,
+            'nama_perusahaan' => $nama,
+            'tentang_perusahaan' => $tentang,
+        );
+        $res = $this->profilmodel->InsertData('hubin_mitra_industri', $data_insert);
+        if ($res >= 1) {
+            ?>
+            <script language="javascript">
+            alert("Berhasil! Data Berhasil Di input!");
+            document.location.href = "../dashboard/hubin";
+            </script>
+            <?php
+        }
     }
 }

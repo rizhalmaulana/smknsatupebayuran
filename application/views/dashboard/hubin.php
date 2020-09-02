@@ -12,6 +12,7 @@
                 </div>
 
                 <!-- Form Pertama -->
+                <form method="POST" action="<?=base_url() . "dashboard/insert_hubin";?>">
                 <div class="form-element">
                     <div class="col-md-12 padding-0">
                         <div class="col-md-12">
@@ -24,19 +25,19 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Upload Gambar Perusahaan</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control">
+                                                <input type="file" class="form-control" name="gambarPerusahaan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Nama Perusahaan</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" placeholder="admin / pembina ekskul">
+                                                <input type="text" class="form-control" placeholder="admin / pembina ekskul" name="namaPerusahaan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Tentang Perusahaan</label>
                                             <div class="col-sm-10">
-                                                <textarea name="ketperusahaan" rows="10" cols="30"
+                                                <textarea name="tentangPerusahaan" rows="10" cols="30"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
@@ -56,6 +57,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 <!-- Form Pertama -->
             </div>
         </div>
