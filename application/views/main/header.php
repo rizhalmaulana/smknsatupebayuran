@@ -10,17 +10,17 @@
     <title><?= $judul; ?></title>
 
     <!-- start: Css -->
-    <link rel="stylesheet" type="text/css" href="../assets/primary/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/bootstrap.min.css">
 
     <!-- plugins -->
-    <link rel="stylesheet" type="text/css" href="../assets/primary/css/plugins/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/primary/css/plugins/simple-line-icons.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/primary/css/plugins/animate.min.css" />
-    <link rel="stylesheet" type="text/css" href="../assets/primary/css/plugins/fullcalendar.min.css" />
-    <link href="../assets/primary/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/simple-line-icons.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/fullcalendar.min.css" />
+    <link href="<?= base_url('assets/'); ?>primary/css/style.css" rel="stylesheet">
     <!-- end: Css -->
 
-    <link rel="shortcut icon" href="../assets/images/beranda/logo-sekolah.png">
+    <link rel="shortcut icon" href="<?= base_url('assets/'); ?>images/beranda/logo-sekolah.png">
 </head>
 
 <body id="mimin" class="dashboard">

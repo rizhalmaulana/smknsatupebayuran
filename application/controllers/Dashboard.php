@@ -253,6 +253,261 @@ class Dashboard extends CI_Controller
                 alert("Berhasil! Data Berhasil Di input!");
                 document.location.href = "../dashboard/hubin";
             </script>
+        <?php
+        }
+    }
+
+    public function edit_struktur($id)
+    {
+        $struktur = $this->profilmodel->get_profil_struktur(" where id='$id'");
+        $data = array(
+            "id" => $struktur[0]->id,
+            "nip" => $struktur[0]->nip,
+            "nama_pendidik" => $struktur[0]->nama_pendidik,
+            "tempat_lahir" => $struktur[0]->tempat_lahir,
+            "tanggal_lahir" => $struktur[0]->tanggal_lahir,
+            "jenis_kelamin" => $struktur[0]->jenis_kelamin,
+            "jabatan" => $struktur[0]->jabatan,
+        );
+
+        $data['headline'] = "Edit Struktur";
+        $data['title'] = "Form Master Edit Struktur Organisasi";
+        $data['url'] = "dashboard/update_struktur";
+
+        $data['judul'] = 'Edit Struktur | SMKN 1 PEBAYURAN';
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
+        $this->load->view('main/sidebar');
+        $this->load->view('main/rightbar');
+        $this->load->view('main/mobile');
+        $this->load->view('dashboard/edit', $data);
+        $this->load->view('main/footer');
+    }
+
+    public function edit_pendidik($id)
+    {
+        $struktur = $this->profilmodel->get_profil_tenaga_pendidik(" where id='$id'");
+        $data = array(
+            "id" => $struktur[0]->id,
+            "nip" => $struktur[0]->nip,
+            "nama_pendidik" => $struktur[0]->nama_pendidik,
+            "tempat_lahir" => $struktur[0]->tempat_lahir,
+            "tanggal_lahir" => $struktur[0]->tanggal_lahir,
+            "jenis_kelamin" => $struktur[0]->jenis_kelamin,
+            "jabatan" => $struktur[0]->jabatan,
+        );
+
+        $data['headline'] = "Edit Pendidik";
+        $data['title'] = "Form Master Edit Tenaga Pendidik";
+        $data['url'] = "dashboard/update_pendidik";
+
+        $data['judul'] = 'Edit Pendidik | SMKN 1 PEBAYURAN';
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
+        $this->load->view('main/sidebar');
+        $this->load->view('main/rightbar');
+        $this->load->view('main/mobile');
+        $this->load->view('dashboard/edit', $data);
+        $this->load->view('main/footer');
+    }
+
+    public function edit_kependidikan($id)
+    {
+        $struktur = $this->profilmodel->get_profil_tenaga_kependidikan(" where id='$id'");
+        $data = array(
+            "id" => $struktur[0]->id,
+            "nip" => $struktur[0]->nip,
+            "nama_pendidik" => $struktur[0]->nama_pendidik,
+            "tempat_lahir" => $struktur[0]->tempat_lahir,
+            "tanggal_lahir" => $struktur[0]->tanggal_lahir,
+            "jenis_kelamin" => $struktur[0]->jenis_kelamin,
+            "jabatan" => $struktur[0]->jabatan,
+        );
+
+        $data['headline'] = "Edit Kependidikan";
+        $data['title'] = "Form Master Edit Tenaga Kependidikan";
+        $data['url'] = "dashboard/update_kependidikan";
+
+        $data['judul'] = 'Edit Kependidikan | SMKN 1 PEBAYURAN';
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
+        $this->load->view('main/sidebar');
+        $this->load->view('main/rightbar');
+        $this->load->view('main/mobile');
+        $this->load->view('dashboard/edit', $data);
+        $this->load->view('main/footer');
+    }
+
+    public function update_struktur()
+    {
+        $id = $_POST['idStruktur'];
+        $nip = $_POST['nipStruktur'];
+        $nama_pendidik = $_POST['namaStruktur'];
+        $tempat_lahir = $_POST['tempatLahirStruktur'];
+        $tanggal_lahir =  $_POST['tanggalLahirStruktur'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        if ($jenis_kelamin == "L") {
+            $kelamin = "Laki - laki";
+        } else {
+            $kelamin = "Perempuan";
+        }
+        $jabatan = $_POST['jabatanStruktur'];
+
+        $data_update = array(
+            'nip' => $nip,
+            'nama_pendidik' => $nama_pendidik,
+            'tempat_lahir' => $tempat_lahir,
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $kelamin,
+            'jabatan' => $jabatan
+        );
+        $where = array('id' => $id); //Kita ubah yang ini okeh
+        $res = $this->profilmodel->UpdateData('profil_struktur_organisasi', $data_update, $where);
+        if ($res >= 1) {
+        ?>
+            <script language="javascript">
+                alert('Horeee, Data Anda Berhasil di Update');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        }
+    }
+
+    public function update_pendidik()
+    {
+        $nip = $_POST['nipStruktur'];
+        $nama_pendidik = $_POST['namaStruktur'];
+        $tempat_lahir = $_POST['tempatLahirStruktur'];
+        $tanggal_lahir =  $_POST['tanggalLahirStruktur'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        if ($jenis_kelamin == "L") {
+            $kelamin = "Laki - laki";
+        } else {
+            $kelamin = "Perempuan";
+        }
+        $jabatan = $_POST['jabatanStruktur'];
+
+        $data_update = array(
+            'nip' => $nip,
+            'nama_pendidik' => $nama_pendidik,
+            'tempat_lahir' => $tempat_lahir,
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $kelamin,
+            'jabatan' => $jabatan
+        );
+        $where = array('nip' => $nip);
+        $res = $this->profilmodel->UpdateData('profil_tenaga_pendidik', $data_update, $where);
+        if ($res >= 1) {
+        ?>
+            <script language="javascript">
+                alert('Horeee, Data Anda Berhasil di Update');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        }
+    }
+    public function update_kependidikan()
+    {
+        $nip = $_POST['nipStruktur'];
+        $nama_pendidik = $_POST['namaStruktur'];
+        $tempat_lahir = $_POST['tempatLahirStruktur'];
+        $tanggal_lahir =  $_POST['tanggalLahirStruktur'];
+        $jenis_kelamin = $_POST['jenis_kelamin'];
+        if ($jenis_kelamin == "L") {
+            $kelamin = "Laki - laki";
+        } else {
+            $kelamin = "Perempuan";
+        }
+        $jabatan = $_POST['jabatanStruktur'];
+
+        $data_update = array(
+            'nip' => $nip,
+            'nama_pendidik' => $nama_pendidik,
+            'tempat_lahir' => $tempat_lahir,
+            'tanggal_lahir' => $tanggal_lahir,
+            'jenis_kelamin' => $kelamin,
+            'jabatan' => $jabatan
+        );
+        $where = array('nip' => $nip);
+        $res = $this->profilmodel->UpdateData('profil_tenaga_kependidikan', $data_update, $where);
+        if ($res >= 1) {
+        ?>
+            <script language="javascript">
+                alert('Horeee, Data Anda Berhasil di Update');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        }
+    }
+
+    public function hapus_struktur($id)
+    {
+        $where = array('id' => $id); //ini buat ngapus berdasarkan id
+        $res = $this->profilmodel->DeleteData('profil_struktur_organisasi', $where);
+        // ini buat manggil model sesuai yang mau kita hapus, 
+        //kalo struktur ya berarti kita harus panggil model struktur okeh :)
+        if ($res >= 1) {
+        ?>
+            <script language="javascript">
+                alert('Horeee, Data Anda Berhasil di Hapus');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        } else {
+        ?>
+            <script language="javascript">
+                alert('Maaf, Data Anda Gagal di Hapus');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        }
+    }
+    public function hapus_pendidik($id)
+    {
+        $where = array('id' => $id);
+        $res = $this->profilmodel->DeleteData('profil_tenaga_pendidik', $where);
+        if ($res >= 1) {
+        ?>
+            <script language="javascript">
+                alert('Horeee, Data Anda Berhasil di Hapus');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        } else {
+        ?>
+            <script language="javascript">
+                alert('Maaf, Data Anda Gagal di Hapus');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        }
+    }
+    public function hapus_kependidikan($id)
+    {
+        $where = array('id' => $id);
+        $res = $this->profilmodel->DeleteData('profil_tenaga_kependidikan', $where);
+        if ($res >= 1) {
+        ?>
+            <script language="javascript">
+                alert('Horeee, Data Anda Berhasil di Hapus');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
+        <?php
+        } else {
+        ?>
+            <script language="javascript">
+                alert('Maaf, Data Anda Gagal di Hapus');
+                document.location.href = "<?= base_url('dashboard/profil') ?>";
+            </script>
 <?php
         }
     }

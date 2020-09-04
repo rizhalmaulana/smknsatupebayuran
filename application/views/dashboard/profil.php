@@ -31,21 +31,21 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Sejarah Sekolah</label>
                                                 <div class="col-sm-10">
-                                                    <textarea name="sejarah" rows="10" cols="30" class="form-control"></textarea>
+                                                    <textarea name="sejarah" rows="10" cols="30" class="form-control" autocomplete="off"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Visi</label>
                                                 <div class="col-sm-10">
                                                     <br>
-                                                    <textarea name="visi" rows="10" cols="30" class="form-control"></textarea>
+                                                    <textarea name="visi" rows="10" cols="30" class="form-control" autocomplete="off"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Misi</label>
                                                 <div class="col-sm-10">
                                                     <br>
-                                                    <textarea name="misi" rows="10" cols="30" class="form-control"></textarea>
+                                                    <textarea name="misi" rows="10" cols="30" class="form-control" autocomplete="off"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,11 +97,11 @@
                                                                     </th>
                                                                 <tbody class="text-center">
                                                                     <?php
-                                                                    $no = 1;
+                                                                    $id = 1;
                                                                     foreach ($data_struktur as $struktur) { ?>
                                                                         <tr>
-                                                                            <td><?= $no++; ?></td>
-                                                                            <td><?= $struktur->nama_struktur; ?></td>
+                                                                            <td><?= $id++; ?></td>
+                                                                            <td><?= $struktur->nama_pendidik; ?></td>
                                                                             <td><?= $struktur->tempat_lahir; ?></td>
                                                                             <td><?= $struktur->tanggal_lahir; ?></td>
                                                                             <td><?= $struktur->jenis_kelamin; ?></td>
@@ -109,8 +109,8 @@
                                                                             <td><?= $struktur->jabatan; ?></td>
                                                                             <td>
                                                                                 <div class="col-md-12">
-                                                                                    <input class="submit btn btn-success" type="submit" value="Edit">
-                                                                                    <input class="submit btn btn-danger" type="submit" value="Hapus">
+                                                                                    <a class="submit btn btn-success" href="<?= "../dashboard/edit_struktur/" . $struktur->id; ?>">Edit </a>
+                                                                                    <a class="submit btn btn-danger" href="<?= "../dashboard/hapus_struktur/" . $struktur->id; ?>">Hapus </a>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -135,25 +135,25 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">NIP</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="nipStruktur">
+                                                                        <input type="text" class="form-control" name="nipStruktur" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Nama</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="namaStruktur">
+                                                                        <input type="text" class="form-control" name="namaStruktur" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Tempat Lahir</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="tempatLahirStruktur">
+                                                                        <input type="text" class="form-control" name="tempatLahirStruktur" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Tanggal Lahir</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="date" class="form-control" name="tanggalLahirStruktur">
+                                                                        <input type="date" class="form-control" name="tanggalLahirStruktur" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -171,7 +171,7 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Jabatan</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="jabatanStruktur">
+                                                                        <input type="text" class="form-control" name="jabatanStruktur" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -255,8 +255,8 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="col-md-12">
-                                                                                    <input class="submit btn btn-success" type="submit" value="Edit">
-                                                                                    <input class="submit btn btn-danger" type="submit" value="Hapus">
+                                                                                    <a class="submit btn btn-success" href="<?= "../dashboard/edit_pendidik/" . $pendidik->id; ?>">Edit </a>
+                                                                                    <a class="submit btn btn-danger" href="<?= "../dashboard/hapus_pendidik/" . $pendidik->id; ?>">Hapus </a>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -281,27 +281,27 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">NIP</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="nipPendidik">
+                                                                        <input type="text" class="form-control" name="nipPendidik" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Nama</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="namaPendidik">
+                                                                        <input type="text" class="form-control" name="namaPendidik" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Tempat
                                                                         Lahir</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="tempatLahirPendidik">
+                                                                        <input type="text" class="form-control" name="tempatLahirPendidik" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Tanggal
                                                                         Lahir</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="date" class="form-control" name="tanggalLahirPendidik">
+                                                                        <input type="date" class="form-control" name="tanggalLahirPendidik" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -319,7 +319,7 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Jabatan</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="jabatanPendidik">
+                                                                        <input type="text" class="form-control" name="jabatanPendidik" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -389,8 +389,8 @@
                                                                             <td><?= $kependidikan->jabatan; ?></td>
                                                                             <td>
                                                                                 <div class="col-md-12">
-                                                                                    <input class="submit btn btn-success" type="submit" value="Edit">
-                                                                                    <input class="submit btn btn-danger" type="submit" value="Hapus">
+                                                                                    <a class="submit btn btn-success" href="<?= "../dashboard/edit_kependidikan/" . $kependidikan->id; ?>">Edit </a>
+                                                                                    <a class="submit btn btn-danger" href="<?= "../dashboard/hapus_kependidikan/" . $kependidikan->id; ?>">Hapus </a>
                                                                                 </div>
                                                                             </td>
                                                                         </tr>
@@ -415,27 +415,27 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">NIP</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="nipKependidikan">
+                                                                        <input type="text" class="form-control" name="nipKependidikan" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Nama</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="namaKependidikan">
+                                                                        <input type="text" class="form-control" name="namaKependidikan" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Tempat
                                                                         Lahir</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="tempatLahirKependidikan">
+                                                                        <input type="text" class="form-control" name="tempatLahirKependidikan" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Tanggal
                                                                         Lahir</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="date" class="form-control" name="tanggalLahirKependidikan">
+                                                                        <input type="date" class="form-control" name="tanggalLahirKependidikan" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -453,7 +453,7 @@
                                                                 <div class="form-group">
                                                                     <label class="col-sm-2 control-label text-right">Jabatan</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="jabatanKependidikan">
+                                                                        <input type="text" class="form-control" name="jabatanKependidikan" autocomplete="off">
                                                                     </div>
                                                                 </div>
                                                             </div>
