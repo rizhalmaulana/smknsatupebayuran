@@ -8,7 +8,11 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->model('profilmodel');
+<<<<<<< HEAD
+        $this->load->model('hubinmodel');
+=======
         $this->load->model('kurikulummodel');
+>>>>>>> 59f3ef6b34945109f8bde8e05fa8567b83e6709f
     }
 
     public function index()
@@ -66,16 +70,19 @@ class Dashboard extends CI_Controller
 
     public function hubin()
     {
-        $hubin['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
+        $data = array(
+            'data_hubin_mitra' => $this->hubinmodel->get_hubin_mitra()
+        );
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
-        $hubin['judul'] = "Hubin Master | SMKN 1 PEBAYURAN";
+        $data['judul'] = "Hubin Master | SMKN 1 PEBAYURAN";
 
-        $this->load->view('main/header', $hubin);
-        $this->load->view('main/topbar', $hubin);
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
         $this->load->view('main/sidebar');
         $this->load->view('main/rightbar');
         $this->load->view('main/mobile');
-        $this->load->view('dashboard/hubin', $hubin);
+        $this->load->view('dashboard/hubin', $data);
         $this->load->view('main/footer');
     }
 
@@ -124,12 +131,21 @@ class Dashboard extends CI_Controller
         );
         $res = $this->profilmodel->InsertData('profil_identitas_sekolah', $data_insert);
         if ($res >= 1) {
+<<<<<<< HEAD
+        ?>
+            <script language="javascript">
+                alert("Berhasil! Data Berhasil Di input!");
+                document.location.href = "../dashboard/profil";
+            </script>
+        <?php
+=======
 ?>
 <script language="javascript">
 alert("Berhasil! Data Berhasil Di input!");
 document.location.href = "../dashboard/profil";
 </script>
 <?php
+>>>>>>> 59f3ef6b34945109f8bde8e05fa8567b83e6709f
         }
     }
 
