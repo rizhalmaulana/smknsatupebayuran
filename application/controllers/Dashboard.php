@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->model('profilmodel');
+        $this->load->model('kurikulummodel');
     }
 
     public function index()
@@ -45,6 +46,24 @@ class Dashboard extends CI_Controller
         $this->load->view('main/footer');
     }
 
+    public function kurikulum()
+    {
+        $data = array(
+            'data_kurikulum_administrasi' => $this->kurikulummodel->get_kurikulum_administrasi()
+        );
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['judul'] = "Kurikulum Master | SMKN 1 PEBAYURAN";
+
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
+        $this->load->view('main/sidebar');
+        $this->load->view('main/rightbar');
+        $this->load->view('main/mobile');
+        $this->load->view('dashboard/kurikulum', $data);
+        $this->load->view('main/footer');
+    }
+
     public function hubin()
     {
         $hubin['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
@@ -72,21 +91,6 @@ class Dashboard extends CI_Controller
         $this->load->view('main/rightbar');
         $this->load->view('main/mobile');
         $this->load->view('dashboard/news', $news);
-        $this->load->view('main/footer');
-    }
-
-    public function kurikulum()
-    {
-        $kurikulum['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
-        $this->session->userdata('email')])->row_array();
-        $kurikulum['judul'] = "Kurikulum Master | SMKN 1 PEBAYURAN";
-
-        $this->load->view('main/header', $kurikulum);
-        $this->load->view('main/topbar', $kurikulum);
-        $this->load->view('main/sidebar');
-        $this->load->view('main/rightbar');
-        $this->load->view('main/mobile');
-        $this->load->view('dashboard/kurikulum', $kurikulum);
         $this->load->view('main/footer');
     }
 
@@ -121,11 +125,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->InsertData('profil_identitas_sekolah', $data_insert);
         if ($res >= 1) {
 ?>
-            <script language="javascript">
-                alert("Berhasil! Data Berhasil Di input!");
-                document.location.href = "../dashboard/profil";
-            </script>
-        <?php
+<script language="javascript">
+alert("Berhasil! Data Berhasil Di input!");
+document.location.href = "../dashboard/profil";
+</script>
+<?php
         }
     }
 
@@ -156,11 +160,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->InsertData('profil_struktur_organisasi', $data_insert);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert("Berhasil! Data Berhasil Di input!");
-                document.location.href = "../dashboard/profil";
-            </script>
-        <?php
+<script language="javascript">
+alert("Berhasil! Data Berhasil Di input!");
+document.location.href = "../dashboard/profil";
+</script>
+<?php
         }
     }
 
@@ -191,11 +195,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->InsertData('profil_tenaga_pendidik', $data_insert);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert("Berhasil! Data Berhasil Di input!");
-                document.location.href = "../dashboard/profil";
-            </script>
-        <?php
+<script language="javascript">
+alert("Berhasil! Data Berhasil Di input!");
+document.location.href = "../dashboard/profil";
+</script>
+<?php
         }
     }
 
@@ -226,11 +230,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->InsertData('profil_tenaga_kependidikan', $data_insert);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert("Berhasil! Data Berhasil Di input!");
-                document.location.href = "../dashboard/profil";
-            </script>
-        <?php
+<script language="javascript">
+alert("Berhasil! Data Berhasil Di input!");
+document.location.href = "../dashboard/profil";
+</script>
+<?php
         }
     }
 
@@ -249,11 +253,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->InsertData('hubin_mitra_industri', $data_insert);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert("Berhasil! Data Berhasil Di input!");
-                document.location.href = "../dashboard/hubin";
-            </script>
-        <?php
+<script language="javascript">
+alert("Berhasil! Data Berhasil Di input!");
+document.location.href = "../dashboard/hubin";
+</script>
+<?php
         }
     }
 
@@ -374,11 +378,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->UpdateData('profil_struktur_organisasi', $data_update, $where);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert('Horeee, Data Anda Berhasil di Update');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Horeee, Data Anda Berhasil di Update');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         }
     }
 
@@ -408,11 +412,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->UpdateData('profil_tenaga_pendidik', $data_update, $where);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert('Horeee, Data Anda Berhasil di Update');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Horeee, Data Anda Berhasil di Update');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         }
     }
     public function update_kependidikan()
@@ -441,11 +445,11 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->UpdateData('profil_tenaga_kependidikan', $data_update, $where);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert('Horeee, Data Anda Berhasil di Update');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Horeee, Data Anda Berhasil di Update');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         }
     }
 
@@ -457,18 +461,18 @@ class Dashboard extends CI_Controller
         //kalo struktur ya berarti kita harus panggil model struktur okeh :)
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert('Horeee, Data Anda Berhasil di Hapus');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Horeee, Data Anda Berhasil di Hapus');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         } else {
         ?>
-            <script language="javascript">
-                alert('Maaf, Data Anda Gagal di Hapus');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Maaf, Data Anda Gagal di Hapus');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         }
     }
     public function hapus_pendidik($id)
@@ -477,18 +481,18 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->DeleteData('profil_tenaga_pendidik', $where);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert('Horeee, Data Anda Berhasil di Hapus');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Horeee, Data Anda Berhasil di Hapus');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         } else {
         ?>
-            <script language="javascript">
-                alert('Maaf, Data Anda Gagal di Hapus');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Maaf, Data Anda Gagal di Hapus');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         }
     }
     public function hapus_kependidikan($id)
@@ -497,17 +501,17 @@ class Dashboard extends CI_Controller
         $res = $this->profilmodel->DeleteData('profil_tenaga_kependidikan', $where);
         if ($res >= 1) {
         ?>
-            <script language="javascript">
-                alert('Horeee, Data Anda Berhasil di Hapus');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
-        <?php
+<script language="javascript">
+alert('Horeee, Data Anda Berhasil di Hapus');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
+<?php
         } else {
         ?>
-            <script language="javascript">
-                alert('Maaf, Data Anda Gagal di Hapus');
-                document.location.href = "<?= base_url('dashboard/profil') ?>";
-            </script>
+<script language="javascript">
+alert('Maaf, Data Anda Gagal di Hapus');
+document.location.href = "<?= base_url('dashboard/profil') ?>";
+</script>
 <?php
         }
     }
