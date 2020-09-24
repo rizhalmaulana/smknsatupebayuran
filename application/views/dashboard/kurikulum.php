@@ -39,22 +39,26 @@
                                                                 </tr>
                                                                 </th>
                                                             <tbody class="text-center">
+                                                                <?php
+                                                                $id = 1;
+                                                                foreach ($data_kurikulum_administrasi as $kurikulum) { ?>
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
+                                                                    <td><?= $id++; ?></td>
+                                                                    <td><?= $kurikulum->berkas_file; ?></td>
+                                                                    <td><?= $kurikulum->tanggal_upload; ?></td>
+                                                                    <td><?= $kurikulum->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
                                                                             <a class="submit btn btn-success"
-                                                                                href="#">Edit
+                                                                                href="<?= "../dashboard/edit_kurikulum_administrasi/" . $kurikulum->id; ?>">Edit
                                                                             </a>
                                                                             <a class="submit btn btn-danger"
-                                                                                href="#">Hapus
+                                                                                href="<?= "../dashboard/hapus_kurikulum_administrasi/" . $kurikulum->id; ?>">Hapus
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -64,39 +68,43 @@
                                     </div>
                                 </div>
                                 <!-- tabel -->
-                                <div class="panel-body" style="padding-bottom:30px;">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">Upload Berkas File</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">Tanggal</label>
-                                            <div class="col-sm-10">
-                                                <input type="date" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">Keterangan Berkas</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="berkas" rows="10" cols="30"
-                                                    class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
+                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_administrasi"; ?>">
+                                    <div class="panel-body" style="padding-bottom:30px;">
                                         <div class="col-md-12">
-                                            <br>
-                                            <button class="btn ripple btn-3d btn-primary form-control">
-                                                <div>
-                                                    <span>Submit</span>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label text-right">Upload Berkas
+                                                    File</label>
+                                                <div class="col-sm-10">
+                                                    <input type="file" class="form-control" name="uploadAdministrasi">
                                                 </div>
-                                            </button>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label text-right">Tanggal</label>
+                                                <div class="col-sm-10">
+                                                    <input type="date" class="form-control" name="tanggalAdministrasi">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label text-right">Keterangan
+                                                    Berkas</label>
+                                                <div class="col-sm-10">
+                                                    <textarea name="keteranganAdministrasi" rows="10" cols="30"
+                                                        class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="col-md-12">
+                                                <br>
+                                                <button class="btn ripple btn-3d btn-primary form-control">
+                                                    <div>
+                                                        <span>Submit</span>
+                                                    </div>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -130,22 +138,26 @@
                                                                 </tr>
                                                                 </th>
                                                             <tbody class="text-center">
+                                                            <?php
+                                                                $id = 1;
+                                                                foreach ($data_kurikulum_perpustakaan as $perpustakaan) { ?>
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
+                                                                    <td><?= $id++; ?></td>
+                                                                    <td><?= $perpustakaan->berkas_file; ?></td>
+                                                                    <td><?= $perpustakaan->tanggal_upload; ?></td>
+                                                                    <td><?= $perpustakaan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
                                                                             <a class="submit btn btn-success"
-                                                                                href="#">Edit
+                                                                                href="<?= "../dashboard/edit_kurikulum_perpustakaan/" . $perpustakaan->id; ?>">Edit
                                                                             </a>
                                                                             <a class="submit btn btn-danger"
-                                                                                href="#">Hapus
+                                                                                href="<?= "../dashboard/hapus_kurikulum_perpustakaan/" . $perpustakaan->id; ?>">Hapus
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -154,24 +166,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_perpustakaan"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Upload Berkas File</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control">
+                                                <input type="file" class="form-control" name="berkasPerpustakaan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Tanggal</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control">
+                                                <input type="date" class="form-control" name="tanggalPerpustakaan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Keterangan Berkas</label>
                                             <div class="col-sm-10">
-                                                <textarea name="perpustakaan" rows="10" cols="30"
+                                                <textarea name="keteranganPerpustakaan" rows="10" cols="30"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
@@ -187,6 +200,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -219,21 +233,22 @@
                                                                 </tr>
                                                                 </th>
                                                             <tbody class="text-center">
+                                                            <?php
+                                                                $id = 1;
+                                                                foreach ($data_kurikulum_jurusan_tei as $jurusan) { ?>
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
+                                                                    <td><?= $id++; ?></td>
+                                                                    <td><?= $jurusan->berkas_file; ?></td>
+                                                                    <td><?= $jurusan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
                                                                             <a class="submit btn btn-success"
-                                                                                href="#">Edit
-                                                                            </a>
-                                                                            <a class="submit btn btn-danger"
-                                                                                href="#">Hapus
+                                                                                href="<?= "../dashboard/edit_kurikulum_jurusan_tei/" . $jurusan->id; ?>">Edit
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -242,18 +257,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_jurusan_tei"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">File Logo Jurusan</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control">
+                                                <input type="file" class="form-control" name="berkasJurusan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Tentang Jurusan</label>
                                             <div class="col-sm-10">
-                                                <textarea name="jurusantei" rows="10" cols="30"
+                                                <textarea name="keteranganJurusan" rows="10" cols="30"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
@@ -269,6 +285,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -301,21 +318,22 @@
                                                                 </tr>
                                                                 </th>
                                                             <tbody class="text-center">
+                                                            <?php
+                                                                $id = 1;
+                                                                foreach ($data_kurikulum_jurusan_to as $jurusan) { ?>
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
+                                                                    <td><?= $id++; ?></td>
+                                                                    <td><?= $jurusan->berkas_file; ?></td>
+                                                                    <td><?= $jurusan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
                                                                             <a class="submit btn btn-success"
-                                                                                href="#">Edit
-                                                                            </a>
-                                                                            <a class="submit btn btn-danger"
-                                                                                href="#">Hapus
+                                                                                href="<?= "../dashboard/edit_kurikulum_jurusan_to/" . $jurusan->id; ?>">Edit
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -324,18 +342,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_jurusan_to"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">File Logo Jurusan</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control">
+                                                <input type="file" class="form-control" name="logoJurusan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Tentang Jurusan</label>
                                             <div class="col-sm-10">
-                                                <textarea name="jurusanto" rows="10" cols="30"
+                                                <textarea name="tentangJurusan" rows="10" cols="30"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
@@ -351,6 +370,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -383,21 +403,22 @@
                                                                 </tr>
                                                                 </th>
                                                             <tbody class="text-center">
+                                                            <?php
+                                                                $id = 1;
+                                                                foreach ($data_kurikulum_jurusan_tkj as $jurusan) { ?>
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>rizal</td>
-                                                                    <td>rizal</td>
+                                                                    <td><?= $id++; ?></td>
+                                                                    <td><?= $jurusan->berkas_file; ?></td>
+                                                                    <td><?= $jurusan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
                                                                             <a class="submit btn btn-success"
-                                                                                href="#">Edit
-                                                                            </a>
-                                                                            <a class="submit btn btn-danger"
-                                                                                href="#">Hapus
+                                                                                href="<?= "../dashboard/edit_kurikulum_jurusan_tkj/" . $jurusan->id; ?>">Edit
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
+                                                                <?php } ?>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -406,18 +427,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_jurusan_tkj"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">File Logo Jurusan</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control">
+                                                <input type="file" class="form-control" name="logoJurusan">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Tentang Jurusan</label>
                                             <div class="col-sm-10">
-                                                <textarea name="jurusantkj" rows="10" cols="30"
+                                                <textarea name="tentangJurusan" rows="10" cols="30"
                                                     class="form-control"></textarea>
                                             </div>
                                         </div>
