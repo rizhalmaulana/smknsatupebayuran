@@ -55,9 +55,6 @@
                         </div>
                     </div>
                 </form>
-                <div class="text-center">
-                    <a class="small" href="auth/daftar">Belum punya akun? Daftar Disini</a>
-                </div>
             
                 <hr>
                 <center><b><p>Developed by SMKN 1 Pebayuran</p></b></center>

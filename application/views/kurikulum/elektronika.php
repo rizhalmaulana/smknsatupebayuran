@@ -9,8 +9,9 @@
     </div>
 </div>
 
+<?php foreach($tei as $elektronik) { ?>
 <p class="mb-5">
-    <center><img src="assets/images/logo/logo-elektronika.png" style="width: 250px; height: 300px;" alt="Image" class="img-fluid"></center>
+    <center><img src="<?= base_url() ?>assets/upload/kurikulum/tei/<?= $elektronik->berkas_file; ?>" style="width: 180px; height: 200px;" alt="Image" class="img-fluid"></center>
 </p>
 <div class="site-section">
     <div class="container">
@@ -19,10 +20,11 @@
                 <h2 class="section-title-underline mb-5">
                     <span><b>Tentang</b></span>
                 </h2>
-                <p>Teknik Elektronika adalah bidang teknik yang mempelajari tentang komponen listrik dan peralatan-peralatan semi konduktor. Teknik Elektronika merupakan bagian dari Teknik Listrik (Teknik Elektro).Teknik Elektronika adalah bidang teknik yang mempelajari tentang komponen listrik dan peralatan-peralatan semi konduktor. Teknik Elektronika merupakan bagian dari Teknik Listrik (Teknik Elektro).</p>
+                <p class="text-justify"><?= $elektronik->keterangan_berkas; ?></p>
             </div>
 
         </div>
     </div>
 </div>
+<?php } ?>
 </div>

@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller{
+    
     public function __construct(){
         parent::__construct();
         $this->load->library('form_validation');
@@ -26,15 +27,13 @@ class Auth extends CI_Controller{
 
         $user = $this->db->get_where('pebayuran_admin', ['email' => $email])->row_array();
 
-        // jika usernya ada
         if ($user) {
-            // jika usernya aktif
             if ($user['is_active'] == 1) {
-                //cek password
                 if (password_verify($password, $user['sandi'])) {
                     $data = [
                         'email' => $user['email'],
                         'role_id' => $user['role_id'],
+                        'Login' => 'OK',
                     ];
                     $this->session->set_userdata($data);
                     redirect('dashboard');
@@ -55,8 +54,7 @@ class Auth extends CI_Controller{
         }
     }
 
-    public function daftar()
-    {
+    public function daftar(){
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[pebayuran_admin.email]', [
             'is_unique' => 'Akun Email Ini Sudah Terdaftar!'

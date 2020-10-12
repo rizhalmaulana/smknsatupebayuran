@@ -31,11 +31,9 @@
           </div>
         </div>
       </div>
-
     </div>
-    
-    <div></div>
-      <!-- Berita -->
+    <div>
+    </div>
       <div class="news-updates">
       <div class="container">
          
@@ -43,7 +41,6 @@
           <div class="col-lg-9">
              <div class="section-heading">
               <h2 class="text-black">Berita &amp; Kegiatan Terbaru</h2>
-              <a href="#">Baca semua berita</a>
             </div>
             <div class="row">
               <div class="col-lg-6">
@@ -68,31 +65,31 @@
                       <span class="mx-1">/</span>
                       <a href="#">Admin</a>, <a href="#">Updates</a>
                     </div>
-                    <h3 class="post-heading"><a href="#">PPDB JAWA BARAT 2020</a></h3>
+                    <h3 class="post-heading"><a href="https://ppdb.disdik.jabarprov.go.id/" target="_blank">PPDB JAWA BARAT 2020</a></h3>
                   </div>
                 </div>
 
                 <div class="post-entry-big horizontal d-flex mb-4">
-                  <a href="#" class="img-link mr-4"><img src="assets/images/blog_2.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="#" class="img-link mr-4"><img src="assets/images/course_4.jpg" alt="Image" class="img-fluid"></a>
                   <div class="post-content">
                     <div class="post-meta">
                       <a href="#">June 6, 2019</a>
                       <span class="mx-1">/</span>
-                      <a href="#">Admission</a>, <a href="#">Updates</a>
+                      <a href="#">Admin</a>, <a href="#">Updates</a>
                     </div>
                     <h3 class="post-heading"><a href="#">Presentasi System Sekolah</a></h3>
                   </div>
                 </div>
 
                 <div class="post-entry-big horizontal d-flex mb-4">
-                  <a href="#" class="img-link mr-4"><img src="assets/images/blog_1.jpg" alt="Image" class="img-fluid"></a>
+                  <a href="#" class="img-link mr-4"><img src="assets/images/course_1.jpg" alt="Image" class="img-fluid"></a>
                   <div class="post-content">
                     <div class="post-meta">
                       <a href="#">June 6, 2019</a>
                       <span class="mx-1">/</span>
-                      <a href="#">Admission</a>, <a href="#">Updates</a>
+                      <a href="#">Admin</a>, <a href="#">Updates</a>
                     </div>
-                    <h3 class="post-heading"><a href="#">Akreditasi Sekolah</a></h3>
+                    <h3 class="post-heading"><a href="https://dapo.dikdasmen.kemdikbud.go.id/sekolah/96BAF7F99017FFBAA289" target="_blank">Akreditasi SMK N 1 Pebayuran</a></h3>
                   </div>
                 </div>
               </div>
@@ -101,26 +98,14 @@
           <div class="col-lg-3">
             <div class="section-heading">
               <h2 class="text-black">Video Sekolah</h2>
-              <a href="#">Lihat Semua Video</a>
+              <a href="https://www.youtube.com/channel/UCgxz4R_Ebom1JQilCDA4V8w" target="_blank">Lihat Semua Video</a>
             </div>
-            <a href="https://www.youtube.com/watch?v=x9AuCrbRgeI&feature=youtu.be" class="video-1 mb-4" data-fancybox="" data-ratio="2">
-              <span class="play">
-                <span class="icon-play"></span>
-              </span>
-              <img src="assets/images/p3.jpg" alt="Image" class="img-fluid">
-            </a>
-              <a href="https://www.youtube.com/watch?v=A5wg_RRXeuM&feature=youtu.be" class="video-1 mb-4" data-fancybox="" data-ratio="2">
-                <span class="play">
-                  <span class="icon-play"></span>
-                </span>
-                <img src="assets/images/bg1.jpg" alt="Image" class="img-fluid">
-              </a>
+              <iframe width="250" height="200" src="https://www.youtube.com/embed/waCRsQ6Uktg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="250" height="200" src="https://www.youtube.com/embed/js3ni0y1DFI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </div>
     </div>
-      <!-- Berita -->
-      <!-- Penganalan sekolah -->
     <div class="section-bg style-1" style="background-image: url('assets/images/about_1.jpg');">
       <div class="container">
         <div class="row">
@@ -132,17 +117,15 @@
           <div class="col-lg-8">
             <p>SMK Negeri 1 Pebayuran berdiri sejak tahun 2006/2007 dan mulai beroperasi pada tahun 2006. SMK Negeri 1 Pebayuran pertama kali didirikan dengan nama SMK Negeri 1 Pebayuran, sejalan dengan adanya pemekaran nama SMK Negeri 1 Pebayuran dirubah menjadi SMK Negeri 12 Kabupaten Bekasi. 
                 Sekolah ini didirikan merupakan realisasi kebijakan dari Pemerintah Kabupaten Indramayu seiring dengan upaya meningkatkan pendidikan sesuai dengan wajar dikdas sembilan tahun. Sebagai lembaga penyelenggara pendidikan SMK Negeri 1 Pebayuran terus-menerus mengikuti perubahan dan perkembangan yang terjadi di dunia pendidikan</p>
-            <p><a href="#">Lanjutkan Baca ></a></p>
           </div>
         </div>
       </div>
     </div>
-<!-- pengnalan sekolah -->
 
     <div class="site-section">
       <div class="container">
         <div class="row mb-5 justify-content-center text-center">
-          <div class="col-lg-4 mb-5">
+          <div class="col-lg-4 mb-8">
             <h2 class="section-title-underline mb-5">
               <span>Program Keahlian</span>
             </h2>
@@ -154,11 +137,17 @@
               <div class="icon-wrapper bg-primary">
               <span><img src="assets/images/logo/logo-ototronik.png" style="width: 100px; height: 100px;" alt="Image" class="img-fluid"></span>
               </div>
+              <?php 
+              foreach($to->result_array() as $row):
+                $berkas = $row['berkas_file'];
+                $tentang = $row['keterangan_berkas'];
+                ?>
               <div class="feature-1-content">
                 <h2>Teknik Ototronika</h2>
-                <p>Teknik Ototronika merupakan kompetensi keahlian dibidang otomotif yang menekankan keahlian pada bidang penguasaan teknologi elektronik dan kontrol yang ada di kendaraan bermotor.</p>
-                <p><a href="#" class="btn btn-primary px-4 rounded-0">Detail</a></p>
+                <p><?php echo htmlentities($tentang , ENT_QUOTES, 'UTF-8');?></p>
+                <p><a href="<?= base_url() ?>ototronik" class="btn btn-primary px-4 rounded-0">Detail</a></p>
               </div>
+              <?php endforeach; ?>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
@@ -166,11 +155,17 @@
               <div class="icon-wrapper bg-primary">
               <span><img src="assets/images/logo/logo-elektronika.png" style="width: 100px; height: 100px;" alt="Image" class="img-fluid"></span>
               </div>
+              <?php 
+              foreach($tei->result_array() as $row):
+                $berkas = $row['berkas_file'];
+                $tentang = $row['keterangan_berkas'];
+                ?>
               <div class="feature-1-content">
                 <h2>Teknik Elektronika Industri</h2>
-                <p>Teknik Elektronika adalah bidang teknik yang mempelajari tentang komponen listrik dan peralatan-peralatan semi konduktor. Teknik Elektronika merupakan bagian dari Teknik Listrik (Teknik Elektro).</p>
-                <p><a href="#" class="btn btn-primary px-4 rounded-0">Detail</a></p>
+                <p><?php echo htmlentities($tentang , ENT_QUOTES, 'UTF-8');?></p>
+                <p><a href="<?= base_url() ?>elektronika" class="btn btn-primary px-4 rounded-0">Detail</a></p>
               </div>
+              <?php endforeach; ?>
             </div> 
           </div>
           <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
@@ -178,23 +173,25 @@
               <div class="icon-wrapper bg-primary">
               <span><img src="assets/images/logo/logo-komputer-jaringan.png" style="width: 100px; height: 100px;" alt="Image" class="img-fluid"></span>
               </div>
+              <?php 
+              foreach($tkj->result_array() as $row):
+                $berkas = $row['berkas_file'];
+                $tentang = $row['keterangan_berkas'];
+                ?>
               <div class="feature-1-content">
                 <h2>Teknik Komputer dan Jaringan</h2>
-                <p>Teknik Komputer Dan Jaringan mempelajari tentang cara merakit komputer, mengenal dan mempelajari hardware yang ada di dalam komputer, serta fokus mempelajari jaringan dasar.</p>
-                <p><a href="#" class="btn btn-primary px-4 rounded-0">Detail</a></p>
+                <p><?php echo htmlentities($tentang , ENT_QUOTES, 'UTF-8');?></p>
+                <p><a href="<?= base_url() ?>jaringan" class="btn btn-primary px-4 rounded-0">Detail</a></p>
               </div>
+              <?php endforeach; ?>
             </div> 
           </div>
         </div>
       </div>
     </div>
-
-
     <div class="site-section">
       <div class="container">
-
-
-        <div class="row mb-5 justify-content-center text-center">
+        <div class="row mb-8 justify-content-center text-center">
           <div class="col-lg-6 mb-1">
             <h2 class="section-title-underline mb-3">
               <span>Pengembangan Diri</span>
@@ -207,128 +204,82 @@
               <div class="owl-slide-3 owl-carousel">
                   <div class="course-1-item">
                     <figure class="thumnail">
-                      <a href="#"><img src="assets/images/eskull/Gerakan-Pramuka.png" alt="Image" class="img-fluid"></a>
-                      <div class="category"><center><h3>Pramuka</h3></center></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
-                    </div>
-                  </div>
-      
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                      <a href=""><img src="assets/images/logo/logo-paskibra.png" alt="Image" class="img-fluid"></a>
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
                       <div class="category"><center><h3>Paskibra</h3></center></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                      <p class="desc mb-4">Paskibraka adalah singkatan dari Pasukan Pengibar Bendera Pusaka dengan tugas utamanya mengibarkan duplikat bendera pusaka dalam upacara peringatan proklamasi kemerdekaan Indonesia di 3 tempat, yakni tingkat kabupaten/kota, provinsi, dan nasional.</p>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
                     </div>
                   </div>
-      
                   <div class="course-1-item">
                     <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/logo/logo-pmr.png" alt="Image" class="img-fluid" style="max-width: 78%;"></center></a>
-                      <div class="category"><center><h3>PMR</h3></center></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
-                    </div>
-                  </div>
-
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/eskull/basket.png" alt="Image" class="img-fluid" style="max-width: 74%;"></center></a>
-                      <div class="category"><center><h3>Basket</h3></center></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
-                    </div>
-                  </div>
-      
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/logo/logo-kesenian.png" alt="Image" class="img-fluid" style="max-width: 60%;"></center></a>
-                      <div class="category"><center><h3>Kesenian</h3></center></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
-                    </div>
-                  </div>
-      
-                  <div class="course-1-item">
-                    <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/logo/logo-football.png" alt="Image" class="img-fluid" style="max-width: 59%;"></center></a>
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
                       <div class="category"><center><h3>Sepak Bola</h3></center></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                      <p class="desc mb-4">Sepak bola, secara resmi dikenal sebagai sepak bola asosiasi, adalah cabang olahraga yang menggunakan bola yang umumnya terbuat dari bahan kulit dan dimainkan oleh dua tim yang masing-masing beranggotakan 11 orang pemain inti dan beberapa pemain cadangan.</p>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
                     </div>
                   </div>
-
                   <div class="course-1-item">
                     <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/eskull/rohis.png" alt="Image" class="img-fluid" style="max-width: 75%;"></center></a>
-                      <div class="category"><center><h3>Rohis</h3></center></div>  
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
+                      <div class="category"><center><h3>Kesenian</h3></center></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                      <p class="desc mb-4">Seni adalah keahlian membuat karya yang bermutu, seperti tari, lukisan. Seni meliputi banyak kegiatan manusia dalam menciptakan karya visual atau pertunjukan yang mengungkapkan imajinasi atau keperigelan teknik pembuatnya, untuk dihargai keindahannya.</p>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
                     </div>
                   </div>
-
-                  <div class="course-1-item">
-                    <figure class="thumnail"><br>
-                      <a href=""><center><img src="assets/images/logo/logo-english-club.png" alt="Image" class="img-fluid" style="max-width: 53%;"></center></a>
-                      <div class="category"><center><h3>English Club</h3></center></div>  
-                    </figure>
-                    <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
-                    </div>
-                  </div>
-
                   <div class="course-1-item">
                     <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/logo/logo-football.png" alt="Image" class="img-fluid" style="max-width: 59%;"></center></a>
-                      <div class="category"><center><h3>Futsal</h3></center></div>  
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
+                      <div class="category"><center><h3>Pramuka</h3></center></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                      <p class="desc mb-4">Pramuka Indonesia adalah nama organisasi pendidikan nonformal yang menyelenggarakan pendidikan kepanduang yang dilaksanakan di Indonesia. Kata "Pramuka" merupakan singkatan dari Praja Muda Karana yang memiliki arti rakyat muda yang suka berkarya.</p>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
                     </div>
                   </div>
-
                   <div class="course-1-item">
                     <figure class="thumnail">
-                      <a href=""><center><img src="assets/images/logo/logo-voli.png" alt="Image" class="img-fluid" style="max-width: 75%;"></center></a>
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
                       <div class="category"><center><h3>Bola Voli</h3></center></div>  
                     </figure>
                     <div class="course-1-content pb-4">
-                      <h2>How To Create Mobile Apps Using Ionic</h2>
-                      <p class="desc mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique accusantium ipsam.</p>
-                      <p><a href="#" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                      <p class="desc mb-4">Bola voli adalah permainan olahraga yang dimainkan oleh dua grup berlawanan. Masing-masing grup memiliki enam orang pemain. Terdapat pula variasi permainan bola voli pantai yang masing-masing grup hanya memiliki dua orang pemain.</p>
+                      <br>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
                     </div>
                   </div>
-      
+                  <div class="course-1-item">
+                    <figure class="thumnail">
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
+                      <div class="category"><center><h3>English Club</h3></center></div>  
+                    </figure>
+                    <div class="course-1-content pb-4">
+                      <p class="desc mb-4">sebuah wadah bagi para mahasiswa dalam menyalurkan minat dan bakat serta pengetahuan di bidang Bahasa Inggris.</p>
+                      <br>
+                      <br>
+                      <br>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                    </div>
+                  </div> 
+                  <div class="course-1-item">
+                    <figure class="thumnail">
+                      <a href="#"><center><img src="assets/images/logo/logo-ekskul.png" alt="Image" class="img-fluid" style="width:200px; height: 200px;"></center></a>
+                      <div class="category"><center><h3>PMR</h3></center></div>  
+                    </figure>
+                    <div class="course-1-content pb-4">
+                      <p class="desc mb-4">Palang Merah Remaja adalah wadah pembinaan dan pengembangan anggota remaja PMI, yang selanjutnya disebut PMR.Terdapat di PMI kota atau kabupaten di seluruh Indonesia.</p>
+                      <br>
+                      <br>
+                      <p><a href="<?= base_url() ?>ekskul" class="btn btn-primary rounded-0 px-4">Baca Selengkapnya</a></p>
+                    </div>
+                  </div>    
               </div>
-      
           </div>
         </div>      
-        
       </div>
     </div>

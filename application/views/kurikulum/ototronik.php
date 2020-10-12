@@ -9,8 +9,9 @@
     </div>
 </div>
 
+<?php foreach($to as $ototronik) { ?>
 <p class="mb-5">
-    <center><img src="assets/images/logo/logo-ototronik.png" style="width: 250px; height: 300px;" alt="Image" class="img-fluid"></center>
+    <center><img src="<?= base_url() ?>assets/upload/kurikulum/to/<?= $ototronik->berkas_file; ?>" style="width: 180px; height: 200px;" alt="Image" class="img-fluid"></center>
 </p>
 <div class="site-section">
     <div class="container">
@@ -19,10 +20,11 @@
                 <h2 class="section-title-underline mb-5">
                     <span><b>Tentang</b></span>
                 </h2>
-                <p>Teknik Ototronika merupakan kompetensi keahlian dibidang otomotif yang menekankan keahlian pada bidang penguasaan teknologi elektronik dan kontrol yang ada di kendaraan bermotor.</p>
+                <p class="text-justify"><?= $ototronik->keterangan_berkas; ?></p>
             </div>
 
         </div>
     </div>
 </div>
+<?php } ?>
 </div>

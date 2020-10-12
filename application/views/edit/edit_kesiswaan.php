@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <!-- Tabel Input Struktur -->
-                                    <form method="POST" action="<?= base_url() . $url; ?>">
+                                    <?= form_open_multipart($url); ?>
                                         <div class="form-element">
                                             <div class="col-md-12 padding-0">
                                                 <div class="col-md-12">
@@ -29,62 +29,63 @@
                                                         <div class="panel-body" style="padding-bottom:30px;">
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
-                                                                    <label
-                                                                        class="col-sm-2 control-label text-right">Id</label>
+                                                                    <label class="col-sm-2 control-label text-right">Id</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control"
-                                                                            name="idEkskul" value="<?= $id; ?>"
-                                                                            autocomplete="off" readonly>
+                                                                        <input type="text" class="form-control" name="idEkskul" value="<?= $id; ?>" autocomplete="off" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label
-                                                                        class="col-sm-2 control-label text-right">Upload
-                                                                        Gambar</label>
+                                                                    <label class="col-sm-2 control-label text-right">Upload Gambar</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="file" class="form-control"
-                                                                            name="uploadgambarekskul"
-                                                                            value="<?= $berkas_file; ?>"
-                                                                            autocomplete="off">
+                                                                        <input type="file" class="form-control" name="edituploadgambarekskul" value="<?= $upload_gambar; ?>" autocomplete="off">
+                                                                        <label class="control-label">*Ukuran Maksimal  2MB *jpeg/jpg/png </label>
+                                                                        <?= form_error('edituploadgambarekskul', '<small class="text-danger pl-3">', '</small>'); ?>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label
-                                                                        class="col-sm-2 control-label text-right">Tanggal</label>
+                                                                    <label class="col-sm-2 control-label text-right">Tanggal</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="date" class="form-control"
-                                                                            name="tanggalEkskul"
-                                                                            value="<?= $tanggal_upload; ?>"
-                                                                            autocomplete="off">
+                                                                        <input type="date" class="form-control" name="edittanggalEkskul" value="<?= $tanggal; ?>" autocomplete="off">
+                                                                        <?= form_error('edittanggalEkskul', '<small class="text-danger pl-3">', '</small>'); ?>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label
-                                                                        class="col-sm-2 control-label text-right">Keterangan</label>
+                                                                    <label class="col-sm-2 control-label text-right">Author</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control"
-                                                                            name="keteranganAdministrasi"
-                                                                            value="<?= $keterangan_berkas; ?>"
-                                                                            autocomplete="off">
+                                                                        <input type="text" class="form-control" name="editauthor" value="<?= $author; ?>" autocomplete="off">
+                                                                        <?= form_error('editauthor', '<small class="text-danger pl-3">', '</small>'); ?>
                                                                     </div>
                                                                 </div>
-                                                                <div class=" panel-body">
-                                                                    <div class="col-md-12">
-                                                                        <br>
-                                                                        <button
-                                                                            class="btn ripple btn-3d btn-primary form-control">
-                                                                            <div>
-                                                                                <span>Edit</span>
-                                                                            </div>
-                                                                        </button>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Headline</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="editheadline" value="<?= $headline_lomba; ?>" autocomplete="off">
+                                                                        <?= form_error('editheadline', '<small class="text-danger pl-3">', '</small>'); ?>
                                                                     </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label text-right">Keterangan</label>
+                                                                    <div class="col-sm-10">
+                                                                        <textarea type="text" rows="10" cols="30" class="form-control" name="editketeranganEkskul" autocomplete="off"><?= $keterangan_lomba; ?></textarea>
+                                                                        <?= form_error('editketeranganEkskul', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class=" panel-body">
+                                                                <div class="col-md-12">
+                                                                    <br>
+                                                                    <button class="btn ripple btn-3d btn-primary form-control">
+                                                                        <div>
+                                                                            <span>Edit</span>
+                                                                        </div>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                    </form>
+                                        <?= form_close(); ?>
                                     <!-- Tabel Input Struktur -->
                                 </div>
                             </div>

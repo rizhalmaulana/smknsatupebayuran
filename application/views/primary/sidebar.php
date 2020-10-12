@@ -46,7 +46,7 @@
                     </a>
 
                     <!-- <li class="active">
-                      <a href="<?= base_url($sm['url']); ?>"><span class="<?= $sm['icon']; ?>"></span> <?= $sm['judul']; ?></a>
+                      <a href="<?= base_url($sm['url']); ?>"><span class="<?= $sm['icon']; ?> <?= $sm['class']; ?>"></span> <?= $sm['judul']; ?></a>
                     </li> -->
 
                 </li>
@@ -57,4 +57,3 @@
             </ul>
         </div>
     </div>
-    <!-- end: Left Menu -->

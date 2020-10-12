@@ -26,6 +26,7 @@
                                             <div class="panel">
                                                 <div class="panel-body">
                                                     <div class="responsive-table">
+                                                    <?= $this->session->flashdata('messageadministrasi'); ?>
                                                         <table id="datatables-example"
                                                             class="table table-striped table-bordered" width="100%"
                                                             cellspacing="0">
@@ -41,20 +42,17 @@
                                                             <tbody class="text-center">
                                                                 <?php
                                                                 $id = 1;
+                                                                $num_char = 100; 
                                                                 foreach ($data_kurikulum_administrasi as $kurikulum) { ?>
                                                                 <tr>
                                                                     <td><?= $id++; ?></td>
-                                                                    <td><?= $kurikulum->berkas_file; ?></td>
+                                                                    <td><a target="blank" href="<?= base_url() ?>assets/upload/kurikulum/administrasi/<?= $kurikulum->berkas_file; ?>"><?= $kurikulum->berkas_file; ?></a></td>
                                                                     <td><?= $kurikulum->tanggal_upload; ?></td>
-                                                                    <td><?= $kurikulum->keterangan_berkas; ?></td>
+                                                                    <td><?= substr($kurikulum->keterangan_berkas, 0, $num_char) . '...'; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
-                                                                            <a class="submit btn btn-success"
-                                                                                href="<?= "../dashboard/edit_kurikulum_administrasi/" . $kurikulum->id; ?>">Edit
-                                                                            </a>
-                                                                            <a class="submit btn btn-danger"
-                                                                                href="<?= "../dashboard/hapus_kurikulum_administrasi/" . $kurikulum->id; ?>">Hapus
-                                                                            </a>
+                                                                            <a class="submit btn btn-success" href="<?= "../dashboard/edit_kurikulum_administrasi/" . $kurikulum->id; ?>">Edit</a>
+                                                                            <a class="submit btn btn-danger" onclick="return confirm('Yakin Kamu Mau Hapus?')" href="<?= "../dashboard/hapus_kurikulum_administrasi/" . $kurikulum->id; ?>">Hapus</a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -68,28 +66,29 @@
                                     </div>
                                 </div>
                                 <!-- tabel -->
-                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_administrasi"; ?>">
+                                <?= form_open_multipart('dashboard/insert_kurikulum_administrasi'); ?>
                                     <div class="panel-body" style="padding-bottom:30px;">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label text-right">Upload Berkas
-                                                    File</label>
+                                                <label class="col-sm-2 control-label text-right">Upload Berkas File</label>
                                                 <div class="col-sm-10">
                                                     <input type="file" class="form-control" name="uploadAdministrasi">
+                                                    <label class="control-label">*Ukuran Maksimal  2MB *pdf/doc/docx/xls </label>
+                                                    <?= form_error('uploadAdministrasi', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label text-right">Tanggal</label>
                                                 <div class="col-sm-10">
                                                     <input type="date" class="form-control" name="tanggalAdministrasi">
+                                                    <?= form_error('tanggalAdministrasi', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label text-right">Keterangan
-                                                    Berkas</label>
+                                                <label class="col-sm-2 control-label text-right">Keterangan Berkas</label>
                                                 <div class="col-sm-10">
-                                                    <textarea name="keteranganAdministrasi" rows="10" cols="30"
-                                                        class="form-control"></textarea>
+                                                    <textarea name="keteranganAdministrasi" rows="10" cols="30" class="form-control"></textarea>
+                                                    <?= form_error('keteranganAdministrasi', '<small class="text-danger pl-3">', '</small>'); ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -104,7 +103,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                <?= form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -125,6 +124,7 @@
                                             <div class="panel">
                                                 <div class="panel-body">
                                                     <div class="responsive-table">
+                                                    <?= $this->session->flashdata('messageperpustakaan'); ?>
                                                         <table id="datatables-example"
                                                             class="table table-striped table-bordered" width="100%"
                                                             cellspacing="0">
@@ -140,20 +140,17 @@
                                                             <tbody class="text-center">
                                                             <?php
                                                                 $id = 1;
+                                                                $num_char = 100; 
                                                                 foreach ($data_kurikulum_perpustakaan as $perpustakaan) { ?>
                                                                 <tr>
                                                                     <td><?= $id++; ?></td>
-                                                                    <td><?= $perpustakaan->berkas_file; ?></td>
+                                                                    <td><a target="blank" href="<?= base_url() ?>assets/upload/kurikulum/perpustakaan/<?= $perpustakaan->berkas_file; ?>"><?= $perpustakaan->berkas_file; ?></a></td>
                                                                     <td><?= $perpustakaan->tanggal_upload; ?></td>
-                                                                    <td><?= $perpustakaan->keterangan_berkas; ?></td>
+                                                                    <td><?= substr($perpustakaan->keterangan_berkas, 0, $num_char) . '...'; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
-                                                                            <a class="submit btn btn-success"
-                                                                                href="<?= "../dashboard/edit_kurikulum_perpustakaan/" . $perpustakaan->id; ?>">Edit
-                                                                            </a>
-                                                                            <a class="submit btn btn-danger"
-                                                                                href="<?= "../dashboard/hapus_kurikulum_perpustakaan/" . $perpustakaan->id; ?>">Hapus
-                                                                            </a>
+                                                                            <a class="submit btn btn-success" href="<?= "../dashboard/edit_kurikulum_perpustakaan/" . $perpustakaan->id; ?>">Edit</a>
+                                                                            <a onclick="return confirm('Yakin Kamu Mau Hapus?')" class="submit btn btn-danger" href="<?= "../dashboard/hapus_kurikulum_perpustakaan/" . $perpustakaan->id; ?>">Hapus</a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -166,26 +163,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_perpustakaan"; ?>">
+                                <?= form_open_multipart('dashboard/insert_kurikulum_perpustakaan'); ?>
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Upload Berkas File</label>
                                             <div class="col-sm-10">
                                                 <input type="file" class="form-control" name="berkasPerpustakaan">
+                                                <label class="control-label">*Ukuran Maksimal 2MB *pdf/doc/docx/xls </label>
+                                                <?= form_error('berkasPerpustakaan', '<small class="text-danger pl-3">', '</small>'); ?>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Tanggal</label>
                                             <div class="col-sm-10">
                                                 <input type="date" class="form-control" name="tanggalPerpustakaan">
+                                                <?= form_error('tanggalPerpustakaan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                                
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label text-right">Keterangan Berkas</label>
                                             <div class="col-sm-10">
-                                                <textarea name="keteranganPerpustakaan" rows="10" cols="30"
-                                                    class="form-control"></textarea>
+                                                <textarea name="keteranganPerpustakaan" rows="10" cols="30" class="form-control"></textarea>
+                                                <?= form_error('keteranganPerpustakaan', '<small class="text-danger pl-3">', '</small>'); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +201,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                </form>
+                                <?= form_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -238,7 +239,11 @@
                                                                 foreach ($data_kurikulum_jurusan_tei as $jurusan) { ?>
                                                                 <tr>
                                                                     <td><?= $id++; ?></td>
-                                                                    <td><?= $jurusan->berkas_file; ?></td>
+                                                                    <td>
+                                                                        <div class="col-md-12">
+                                                                            <img src="<?= base_url() ?>assets/upload/kurikulum/tei/<?= $jurusan->berkas_file; ?>" style="width: 80px; 100px" alt="Image" class="img-fluid">
+                                                                        </div>
+                                                                    </td>
                                                                     <td><?= $jurusan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
@@ -257,35 +262,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_jurusan_tei"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">File Logo Jurusan</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="berkasJurusan">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">Tentang Jurusan</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="keteranganJurusan" rows="10" cols="30"
-                                                    class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-12">
-                                            <br>
-                                            <button class="btn ripple btn-3d btn-primary form-control">
-                                                <div>
-                                                    <span>Submit</span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -323,7 +301,11 @@
                                                                 foreach ($data_kurikulum_jurusan_to as $jurusan) { ?>
                                                                 <tr>
                                                                     <td><?= $id++; ?></td>
-                                                                    <td><?= $jurusan->berkas_file; ?></td>
+                                                                    <td>
+                                                                        <div class="col-md-12">
+                                                                            <img src="<?= base_url() ?>assets/upload/kurikulum/to/<?= $jurusan->berkas_file; ?>" style="width: 80px; 100px" alt="Image" class="img-fluid">
+                                                                        </div>
+                                                                    </td>
                                                                     <td><?= $jurusan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
@@ -342,35 +324,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_jurusan_to"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">File Logo Jurusan</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="logoJurusan">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">Tentang Jurusan</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="tentangJurusan" rows="10" cols="30"
-                                                    class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-12">
-                                            <br>
-                                            <button class="btn ripple btn-3d btn-primary form-control">
-                                                <div>
-                                                    <span>Submit</span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -408,7 +363,11 @@
                                                                 foreach ($data_kurikulum_jurusan_tkj as $jurusan) { ?>
                                                                 <tr>
                                                                     <td><?= $id++; ?></td>
-                                                                    <td><?= $jurusan->berkas_file; ?></td>
+                                                                    <td>
+                                                                        <div class="col-md-12">
+                                                                            <img src="<?= base_url() ?>assets/upload/kurikulum/tkj/<?= $jurusan->berkas_file; ?>" style="width: 80px; 100px" alt="Image" class="img-fluid">
+                                                                        </div>
+                                                                    </td>
                                                                     <td><?= $jurusan->keterangan_berkas; ?></td>
                                                                     <td>
                                                                         <div class="col-md-12">
@@ -427,33 +386,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form method="POST" action="<?= base_url() . "dashboard/insert_kurikulum_jurusan_tkj"; ?>">
                                 <div class="panel-body" style="padding-bottom:30px;">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">File Logo Jurusan</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="logoJurusan">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label text-right">Tentang Jurusan</label>
-                                            <div class="col-sm-10">
-                                                <textarea name="tentangJurusan" rows="10" cols="30"
-                                                    class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-12">
-                                            <br>
-                                            <button class="btn ripple btn-3d btn-primary form-control">
-                                                <div>
-                                                    <span>Submit</span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

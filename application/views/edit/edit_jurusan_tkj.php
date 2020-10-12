@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <!-- Tabel Input Struktur -->
-                                    <form method="POST" action="<?= base_url() . $url; ?>">
+                                    <?= form_open_multipart($url); ?>
                                         <div class="form-element">
                                             <div class="col-md-12 padding-0">
                                                 <div class="col-md-12">
@@ -32,30 +32,24 @@
                                                                     <label
                                                                         class="col-sm-2 control-label text-right">Id</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control"
-                                                                            name="idJurusan" value="<?= $id; ?>"
-                                                                            autocomplete="off" readonly>
+                                                                        <input type="text" class="form-control" name="idJurusan" value="<?= $id; ?>" autocomplete="off" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label
-                                                                        class="col-sm-2 control-label text-right">Berkas
-                                                                        File</label>
+                                                                        class="col-sm-2 control-label text-right">Logo Jurusan</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="file" class="form-control"
-                                                                            name="berkasJurusan"
-                                                                            value="<?= $berkas_file; ?>"
-                                                                            autocomplete="off">
+                                                                        <input type="file" class="form-control" name="berkasJurusan" value="<?= $berkas_file; ?>" autocomplete="off">
+                                                                        <label class="control-label">*Ukuran Maksimal 2MB *jpeg/jpg/png </label>
+                                                                        <?= form_error('berkasJurusan', '<small class="text-danger pl-3">', '</small>'); ?>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label
                                                                         class="col-sm-2 control-label text-right">Keterangan</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="text" class="form-control"
-                                                                            name="keteranganJurusan"
-                                                                            value="<?= $keterangan_berkas; ?>"
-                                                                            autocomplete="off">
+                                                                        <input type="text" class="form-control" name="keteranganJurusan" value="<?= $keterangan_berkas; ?>" autocomplete="off">
+                                                                        <?= form_error('keteranganJurusan', '<small class="text-danger pl-3">', '</small>'); ?>
                                                                     </div>
                                                                 </div>
                                                                 <div class=" panel-body">
@@ -74,7 +68,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                    </form>
+                                        <?= form_close(); ?>
                                     <!-- Tabel Input Struktur -->
                                 </div>
                             </div>

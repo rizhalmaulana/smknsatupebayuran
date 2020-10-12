@@ -9,9 +9,9 @@
     </div>
 </div>
 
+<?php foreach($tkj as $jaringan) { ?>
 <p class="mb-5">
-    <center><img src="assets/images/logo/logo-komputer-jaringan.png" style="width: 250px; height: 300px;" alt="Image"
-            class="img-fluid"></center>
+    <center><img src="<?= base_url() ?>assets/upload/kurikulum/tkj/<?= $jaringan->berkas_file; ?>" style="width: 180px; height: 200px;" alt="Image" class="img-fluid"></center>
 </p>
 <div class="site-section">
     <div class="container">
@@ -20,11 +20,11 @@
                 <h2 class="section-title-underline mb-5">
                     <span><b>Tentang</b></span>
                 </h2>
-                <p>Teknik Komputer Dan Jaringan mempelajari tentang cara merakit komputer, mengenal dan mempelajari
-                    hardware yang ada di dalam komputer, serta fokus mempelajari jaringan dasar.</p>
+                <p class="text-justify"><?= $jaringan->keterangan_berkas; ?></p>
             </div>
 
         </div>
     </div>
 </div>
+<?php } ?>
 </div>

@@ -7,14 +7,23 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if(empty($this->session->userdata('Login'))){
+            redirect('auth');
+        }
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
         $this->load->model('profilmodel');
         $this->load->model('hubinmodel');
         $this->load->model('kurikulummodel');
         $this->load->model('kesiswaanmodel');
+        $this->load->model('dashboardmodel');
     }
     
     public function index()
     {
+        $data['pendidik'] = $this->dashboardmodel->count_pendidik();
+        $data['kependidikan'] = $this->dashboardmodel->count_kependidikan();
+        $data['jurusan'] = $this->dashboardmodel->count_jurusan();
         $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $data['judul'] = "Dashboard | SMKN 1 PEBAYURAN";
@@ -36,6 +45,7 @@ class Dashboard extends CI_Controller
             'data_pendidik' => $this->profilmodel->get_profil_tenaga_pendidik(),
             'data_kependidikan' => $this->profilmodel->get_profil_tenaga_kependidikan()
         );
+        $data['data'] = $this->db->get('profil_identitas_sekolah')->result();
         $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
         $this->session->userdata('email')])->row_array();
         $data['judul'] = "Profil Master | SMKN 1 PEBAYURAN";
@@ -47,134 +57,202 @@ class Dashboard extends CI_Controller
         $this->load->view('main/mobile');
         $this->load->view('dashboard/profil', $data);
         $this->load->view('main/footer');
+        
     }
 
     public function insert_identitas()
     {
-        $gambar     = $_POST['file_gambar'];
-        $sejarah    = $_POST['sejarah'];
-        $visi       = $_POST['visi'];
-        $misi       = $_POST['misi'];
-        $data_insert = array(
-            'id' => '',
-            'file_gambar' => $gambar,
-            'sejarah_sekolah' => $sejarah,
-            'visi' => $visi,
-            'misi' => $misi,
-        );
-        $res = $this->profilmodel->InsertData('profil_identitas_sekolah', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
-            </script>
-            <?php
+        $this->form_validation->set_rules('sejarah_sekolah', 'Sejarah', 'required');
+        $this->form_validation->set_rules('visi', 'Visi', 'required');
+        $this->form_validation->set_rules('misi', 'Misi', 'required');
+
+        $config['upload_path']          = './assets/upload/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['file_gambar']))
+        {
+            $this->upload->do_upload('file_gambar');
+            $data1 = $this->upload->data();
+            $file1 = $data1['file_name'];
         }
+
+        if ($this->form_validation->run()){
+            $sejarah = $this->input->post('sejarah_sekolah', true);
+            $visi    = $this->input->post('visi', true);
+            $misi    = $this->input->post('misi', true);
+
+            $data = [
+                    'file_gambar' => $file1,
+                    'sejarah_sekolah' => $sejarah,
+                    'visi' => $visi,
+                    'misi' => $misi,
+                    'date_created' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('profil_identitas_sekolah', $data);
+            if ($insert){
+                $this->session->set_flashdata('messageidentitas', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek halaman utama</div>');
+                redirect('dashboard/profil');
+            }else{
+                $this->session->set_flashdata('messageidentitas', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/profil');
+            }
+
+        }else{
+            $this->profil();
+        }
+
     }
     
     public function insert_struktur()
     {
-        $nip            = $_POST['nipStruktur'];
-        $nama           = $_POST['namaStruktur'];
-        $tempatLahir    = $_POST['tempatLahirStruktur'];
-        $tanggalLahir   = $_POST['tanggalLahirStruktur'];
-        $kelamin        = $_POST['jenis_kelamin'];
-        $jabatan        = $_POST['jabatanStruktur'];
-        
-        if ($kelamin == "L") {
-            $jenisKelamin = "Laki - laki";
-        } else {
-            $jenisKelamin = "Perempuan";
-        }
-        
-        $data_insert = array(
-            'id' => '',
-            'nip' => $nip,
-            'nama_pendidik' => $nama,
-            'tempat_lahir' => $tempatLahir,
-            'tanggal_lahir' => $tanggalLahir,
-            'jenis_kelamin' => $jenisKelamin,
-            'jabatan' => $jabatan,
-        );
-        $res = $this->profilmodel->InsertData('profil_struktur_organisasi', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
-            </script>
-            <?php
+        $this->form_validation->set_rules('nipStruktur', 'Nip', 'required');
+        $this->form_validation->set_rules('namaStruktur', 'Struktur', 'required');
+        $this->form_validation->set_rules('tempatLahirStruktur', 'Tempat', 'required');
+        $this->form_validation->set_rules('tanggalLahirStruktur', 'Tanggal', 'required');
+        $this->form_validation->set_rules('jeniskelaminStruktur', 'Gender', 'required');
+        $this->form_validation->set_rules('jabatanStruktur', 'Jabatan', 'required');
+
+        if ($this->form_validation->run()){
+            $nip            = $this->input->post('nipStruktur', true);
+            $struktur       = $this->input->post('namaStruktur', true);
+            $tempatLahir    = $this->input->post('tempatLahirStruktur', true);
+            $tanggalLahir   = $this->input->post('tanggalLahirStruktur', true);
+            $genderStruktur = $this->input->post('jeniskelaminStruktur', true);
+            $jabatan        = $this->input->post('jabatanStruktur', true);
+
+            if ($genderStruktur == "L") {
+                $jenisKelamin = "Laki - laki";
+            } else {
+                $jenisKelamin = "Perempuan";
+            }
+
+            $data = [
+                    'nip' => $nip,
+                    'nama_pendidik' => $struktur,
+                    'tempat_lahir' => $tempatLahir,
+                    'tanggal_lahir' => $tanggalLahir,
+                    'jenis_kelamin' => $jenisKelamin,
+                    'jabatan' => $jabatan,
+                    'date_created' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('profil_struktur_organisasi', $data);
+            if ($insert){
+                $this->session->set_flashdata('messagestruktur', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/profil');
+            }else{
+                $this->session->set_flashdata('messagestruktur', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/profil');
+            }
+
+        }else{
+            $this->profil();
         }
     }
     
     public function insert_pendidik()
     {
-        $nip            = $_POST['nipPendidik'];
-        $nama           = $_POST['namaPendidik'];
-        $tempatLahir    = $_POST['tempatLahirPendidik'];
-        $tanggalLahir   = $_POST['tanggalLahirPendidik'];
-        $kelamin        = $_POST['jenisKelamin'];
-        $jabatan        = $_POST['jabatanPendidik'];
-        
-        if ($kelamin == "L") {
-            $jenisKelamin = "Laki - laki";
-        } else {
-            $jenisKelamin = "Perempuan";
-        }
-        
-        $data_insert = array(
-            'id' => '',
-            'nip' => $nip,
-            'nama_pendidik' => $nama,
-            'tempat_lahir' => $tempatLahir,
-            'tanggal_lahir' => $tanggalLahir,
-            'jenis_kelamin' => $jenisKelamin,
-            'jabatan' => $jabatan,
-        );
-        $res = $this->profilmodel->InsertData('profil_tenaga_pendidik', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
-            </script>
-            <?php
+        $this->form_validation->set_rules('nipPendidik', 'Nip', 'required');
+        $this->form_validation->set_rules('namaPendidik', 'Pendidik', 'required');
+        $this->form_validation->set_rules('tempatLahirPendidik', 'Tempat', 'required');
+        $this->form_validation->set_rules('tanggalLahirPendidik', 'Tanggal', 'required');
+        $this->form_validation->set_rules('jenisKelaminPendidik', 'Gender', 'required');
+        $this->form_validation->set_rules('jabatanPendidik', 'Jabatan', 'required');
+
+        if ($this->form_validation->run()){
+            $nip            = $this->input->post('nipPendidik', true);
+            $pendidik       = $this->input->post('namaPendidik', true);
+            $tempatLahir    = $this->input->post('tempatLahirPendidik', true);
+            $tanggalLahir   = $this->input->post('tanggalLahirPendidik', true);
+            $genderPendidik = $this->input->post('jenisKelaminPendidik', true);
+            $jabatan        = $this->input->post('jabatanPendidik', true);
+
+            if ($genderPendidik == "L") {
+                $jenisKelamin = "Laki - laki";
+            } else {
+                $jenisKelamin = "Perempuan";
+            }
+
+            $data = [
+                    'nip' => $nip,
+                    'nama_pendidik' => $pendidik,
+                    'tempat_lahir' => $tempatLahir,
+                    'tanggal_lahir' => $tanggalLahir,
+                    'jenis_kelamin' => $jenisKelamin,
+                    'jabatan' => $jabatan,
+                    'date_created' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('profil_tenaga_pendidik', $data);
+            if ($insert){
+                $this->session->set_flashdata('messagependidik', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/profil');
+            }else{
+                $this->session->set_flashdata('messagependidik', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/profil');
+            }
+
+        }else{
+            $this->profil();
         }
     }
     
     public function insert_kependidikan()
     {
-        $nip            = $_POST['nipKependidikan'];
-        $nama           = $_POST['namaKependidikan'];
-        $tempatLahir    = $_POST['tempatLahirKependidikan'];
-        $tanggalLahir   = $_POST['tanggalLahirKependidikan'];
-        $kelamin        = $_POST['jenisKelamin'];
-        $jabatan        = $_POST['jabatanKependidikan'];
-        
-        if ($kelamin == "L") {
-            $jenisKelamin = "Laki - laki";
-        } else {
-            $jenisKelamin = "Perempuan";
-        }
-        
-        $data_insert = array(
-            'id' => '',
-            'nip' => $nip,
-            'nama_pendidik' => $nama,
-            'tempat_lahir' => $tempatLahir,
-            'tanggal_lahir' => $tanggalLahir,
-            'jenis_kelamin' => $jenisKelamin,
-            'jabatan' => $jabatan,
-        );
-        $res = $this->profilmodel->InsertData('profil_tenaga_kependidikan', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/profil";
-            </script>
-            <?php
+        $this->form_validation->set_rules('nipKependidikan', 'Nip', 'required');
+        $this->form_validation->set_rules('namaKependidikan', 'Kependidikan', 'required');
+        $this->form_validation->set_rules('tempatLahirKependidikan', 'Tempat', 'required');
+        $this->form_validation->set_rules('tanggalLahirKependidikan', 'Tanggal', 'required');
+        $this->form_validation->set_rules('jenisKelaminKependidikan', 'Gender', 'required');
+        $this->form_validation->set_rules('jabatanKependidikan', 'Jabatan', 'required');
+
+        if ($this->form_validation->run()){
+            $nip            = $this->input->post('nipKependidikan', true);
+            $kependidikan   = $this->input->post('namaKependidikan', true);
+            $tempatLahir    = $this->input->post('tempatLahirKependidikan', true);
+            $tanggalLahir   = $this->input->post('tanggalLahirKependidikan', true);
+            $genderKependidikan = $this->input->post('jenisKelaminKependidikan', true);
+            $jabatan        = $this->input->post('jabatanKependidikan', true);
+
+            if ($genderKependidikan == "L") {
+                $jenisKelamin = "Laki - laki";
+            } else {
+                $jenisKelamin = "Perempuan";
+            }
+
+            $data = [
+                    'nip' => $nip,
+                    'nama_pendidik' => $kependidikan,
+                    'tempat_lahir' => $tempatLahir,
+                    'tanggal_lahir' => $tanggalLahir,
+                    'jenis_kelamin' => $jenisKelamin,
+                    'jabatan' => $jabatan,
+                    'date_created' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('profil_tenaga_kependidikan', $data);
+            if ($insert){
+                $this->session->set_flashdata('messagekependidikan', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/profil');
+            }else{
+                $this->session->set_flashdata('messagekependidikan', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/profil');
+            }
+
+        }else{
+            $this->profil();
         }
     }
     
@@ -293,6 +371,7 @@ class Dashboard extends CI_Controller
         );
         $where = array('id' => $id); //Kita ubah yang ini okeh
         $res = $this->profilmodel->UpdateData('profil_struktur_organisasi', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -327,6 +406,7 @@ class Dashboard extends CI_Controller
         );
         $where = array('nip' => $nip);
         $res = $this->profilmodel->UpdateData('profil_tenaga_pendidik', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -361,6 +441,7 @@ class Dashboard extends CI_Controller
         );
         $where = array('nip' => $nip);
         $res = $this->profilmodel->UpdateData('profil_tenaga_kependidikan', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -373,10 +454,9 @@ class Dashboard extends CI_Controller
     
     public function hapus_struktur($id)
     {
-        $where = array('id' => $id); //ini buat ngapus berdasarkan id
+        $where = array('id' => $id);
         $res = $this->profilmodel->DeleteData('profil_struktur_organisasi', $where);
-        // ini buat manggil model sesuai yang mau kita hapus, 
-        //kalo struktur ya berarti kita harus panggil model struktur okeh :)
+
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -398,6 +478,7 @@ class Dashboard extends CI_Controller
     {
         $where = array('id' => $id);
         $res = $this->profilmodel->DeleteData('profil_tenaga_pendidik', $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -419,6 +500,7 @@ class Dashboard extends CI_Controller
     {
         $where = array('id' => $id);
         $res = $this->profilmodel->DeleteData('profil_tenaga_kependidikan', $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -454,27 +536,144 @@ class Dashboard extends CI_Controller
         $this->load->view('main/rightbar');
         $this->load->view('main/mobile');
         $this->load->view('dashboard/hubin', $data);
-        $this->load->view('main/footer');
+        $this->load->view('main/footer', $data);
     }
 
     public function insert_hubin()
     {
-        $gambar     = $_POST['gambarPerusahaan'];
-        $nama       = $_POST['namaPerusahaan'];
-        $tentang    = $_POST['tentangPerusahaan'];
+        $this->form_validation->set_rules('namaPerusahaan', 'Nama Perusahaan', 'required');
+        $this->form_validation->set_rules('tentangPerusahaan', 'Keterangan', 'required');
+
+        $config['upload_path']          = './assets/upload/hubin/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
         
-        $data_insert = array(
-            'id' => '',
-            'gambar' => $gambar,
-            'nama_perusahaan' => $nama,
-            'tentang_perusahaan' => $tentang,
-        );
-        $res = $this->profilmodel->InsertData('hubin_mitra_industri', $data_insert);
+        if (!empty($_FILES['gambarPerusahaan']))
+        {
+            $this->upload->do_upload('gambarPerusahaan');
+            $data1 = $this->upload->data();
+            $filehubin = $data1['file_name'];
+        }
+
+        if ($this->form_validation->run()){
+            $nama       = $this->input->post('namaPerusahaan', true);
+            $tentang    = $this->input->post('tentangPerusahaan', true);
+
+            $data = [
+                'gambar' => $filehubin,
+                'nama_perusahaan' => $nama,
+                'tentang_perusahaan' => $tentang,
+                'date_created' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('hubin_mitra_industri', $data);
+
+            if ($insert){
+                $this->session->set_flashdata('messagehubin', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/hubin');
+            }else{
+                $this->session->set_flashdata('messagehubin', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/hubin');
+            }
+        }else{
+            $this->hubin();
+        }
+    }
+
+    public function hapus_hubin($id)
+    {
+        $where = array('id' => $id);
+        $res = $this->hubinmodel->DeleteData('hubin_mitra_industri', $where);
+
         if ($res >= 1) {
             ?>
             <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/hubin";
+            alert('Horeee, Data Anda Berhasil di Hapus');
+            document.location.href = "<?= base_url('dashboard/hubin') ?>";
+            </script>
+            <?php
+        } else {
+            ?>
+            <script language="javascript">
+            alert('Maaf, Data Anda Gagal di Hapus');
+            document.location.href = "<?= base_url('dashboard/hubin') ?>";
+            </script>
+            <?php
+        }
+    }
+
+    public function edit_hubin($id)
+    {
+        $struktur = $this->hubinmodel->get_hubin_mitra(" where id='$id'");
+        $data = array(
+            "id" => $struktur[0]->id,
+            "gambar" => $struktur[0]->gambar,
+            "nama_perusahaan" => $struktur[0]->nama_perusahaan,
+            "tentang_perusahaan" => $struktur[0]->tentang_perusahaan,
+        );
+        
+        $data['headline'] = "Edit Hubin";
+        $data['title'] = "Form Master Edit Hubin Sekolah";
+        $data['url'] = "dashboard/update_hubin";
+        
+        $data['judul'] = 'Edit Hubin | SMKN 1 PEBAYURAN';
+        $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
+        $this->load->view('main/sidebar');
+        $this->load->view('main/rightbar');
+        $this->load->view('main/mobile');
+        $this->load->view('edit/edit_hubin', $data);
+        $this->load->view('main/footer');
+    }
+
+    public function update_hubin()
+    {
+        $idHubin    = $_POST['idHubin']; 
+        $nama       = $_POST['namaHubin'];
+        $tentang    = $_POST['tentangHubin'];
+
+        $config['upload_path']          = './assets/upload/hubin/';
+        $config['allowed_types']        = 'jpeg|png|gif|jpg';
+        $config['max_size']             = 50000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['gambarHubin']))
+        {
+            $this->upload->do_upload('gambarHubin');
+            $data1 = $this->upload->data();
+            $fileedithubin = $data1['file_name'];
+        }
+
+        $data_update = array(
+            'id'    => $idHubin,
+            'gambar' => $fileedithubin,
+            'nama_perusahaan' => $nama,
+            'tentang_perusahaan' => $tentang,
+            'date_created' => date('Y-m-d H:i:s'),
+        );
+        $where = array('id' => $idHubin); //Kita ubah yang ini okeh
+        $res = $this->hubinmodel->UpdateData('hubin_mitra_industri', $data_update, $where);
+        
+        if ($res >= 1) {
+            ?>
+            <script language="javascript">
+            alert('Horeee, Data Anda Berhasil di Update');
+            document.location.href = "<?= base_url('dashboard/hubin') ?>";
+            </script>
+            <?php
+        }else{
+            ?>
+            <script language="javascript">
+            alert('Maaf, Data Anda Gagal di Update');
+            document.location.href = "<?= base_url('dashboard/hubin') ?>";
             </script>
             <?php
         }
@@ -507,24 +706,46 @@ class Dashboard extends CI_Controller
     
     public function insert_kurikulum_administrasi()
     {
-        $upload        = $_POST['uploadAdministrasi'];
-        $tanggal       = $_POST['tanggalAdministrasi'];
-        $keterangan    = $_POST['keteranganAdministrasi'];
+        $this->form_validation->set_rules('tanggalAdministrasi', 'Tanggal Administrasi', 'required');
+        $this->form_validation->set_rules('keteranganAdministrasi', 'Keterangan ', 'required');
+
+        $config['upload_path']          = './assets/upload/kurikulum/administrasi/';
+        $config['allowed_types']        = 'pdf|xls|doc|docx';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
         
-        $data_insert = array(
-            'id' => '',
-            'berkas_file' => $upload,
-            'tanggal_upload' => $tanggal,
-            'keterangan_berkas' => $keterangan,
-        );
-        $res = $this->kurikulummodel->InsertData('kurikulum_administrasi_guru', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/kurikulum";
-            </script>
-            <?php
+        if (!empty($_FILES['uploadAdministrasi']))
+        {
+            $this->upload->do_upload('uploadAdministrasi');
+            $data1 = $this->upload->data();
+            $fileadministrasi = $data1['file_name'];
+        }
+
+        if ($this->form_validation->run()){
+            $tanggal       = $this->input->post('tanggalAdministrasi', true);
+            $keterangan    = $this->input->post('keteranganAdministrasi', true);
+
+            $data = [
+                'berkas_file' => $fileadministrasi,
+                'tanggal_upload' => $tanggal,
+                'keterangan_berkas' => $keterangan,
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('kurikulum_administrasi_guru', $data);
+
+            if ($insert){
+                $this->session->set_flashdata('messageadministrasi', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/kurikulum');
+            }else{
+                $this->session->set_flashdata('messageadministrasi', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/kurikulum');
+            }
+        }else{
+            $this->kurikulum();
         }
     }
     
@@ -559,6 +780,7 @@ class Dashboard extends CI_Controller
     {
         $where = array('id' => $id);
         $res = $this->kurikulummodel->DeleteData('kurikulum_administrasi_guru', $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -578,19 +800,33 @@ class Dashboard extends CI_Controller
 
     public function update_administrasi()
     {
-        $idAdministrasi = $_POST['idAdministrasi']; 
-        $upload = $_POST['berkasAdministrasi'];
-        $tanggal = $_POST['tanggalAdministrasi'];
-        $keterangan = $_POST['keteranganAdministrasi'];
+        $idAdmin        = $_POST['idAdministrasi'];
+        $tanggal        = $_POST['tanggalAdministrasi'];
+        $keterangan     = $_POST['keteranganAdministrasi'];
         
+        $config['upload_path']          = './assets/upload/kurikulum/administrasi';
+        $config['allowed_types']        = 'pdf|doc|docx|xls';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['berkasAdministrasi']))
+        {
+            $this->upload->do_upload('berkasAdministrasi');
+            $data1 = $this->upload->data();
+            $fileeditadmin = $data1['file_name'];
+        }
+
         $data_update = array(
-            'id' => $idAdministrasi,
-            'berkas_file' => $upload,
+            'id' => $idAdmin,
+            'berkas_file' => $fileeditadmin,
             'tanggal_upload' => $tanggal,
             'keterangan_berkas' => $keterangan,
         );
-        $where = array('id' => $idAdministrasi);
+
+        $where = array('id' => $idAdmin);
         $res = $this->kurikulummodel->UpdateData('kurikulum_administrasi_guru', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -603,24 +839,46 @@ class Dashboard extends CI_Controller
 
     public function insert_kurikulum_perpustakaan()
     {
-        $upload        = $_POST['berkasPerpustakaan'];
-        $tanggal       = $_POST['tanggalPerpustakaan'];
-        $keterangan    = $_POST['keteranganPerpustakaan'];
+        $this->form_validation->set_rules('tanggalPerpustakaan', 'Tanggal Perpustakaan', 'required');
+        $this->form_validation->set_rules('keteranganPerpustakaan', 'Keterangan ', 'required');
+
+        $config['upload_path']          = './assets/upload/kurikulum/perpustakaan/';
+        $config['allowed_types']        = 'pdf|xls|doc|docx';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
         
-        $data_insert = array(
-            'id' => '',
-            'berkas_file' => $upload,
-            'tanggal_upload' => $tanggal,
-            'keterangan_berkas' => $keterangan,
-        );
-        $res = $this->kurikulummodel->InsertData('kurikulum_perpustakaan_sekolah', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/kurikulum";
-            </script>
-            <?php
+        if (!empty($_FILES['berkasPerpustakaan']))
+        {
+            $this->upload->do_upload('berkasPerpustakaan');
+            $data1 = $this->upload->data();
+            $fileperpustakaan = $data1['file_name'];
+        }
+
+        if ($this->form_validation->run()){
+            $tanggal       = $this->input->post('tanggalPerpustakaan', true);
+            $keterangan    = $this->input->post('keteranganPerpustakaan', true);
+
+            $data = [
+                'berkas_file' => $fileperpustakaan,
+                'tanggal_upload' => $tanggal,
+                'keterangan_berkas' => $keterangan,
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('kurikulum_perpustakaan_sekolah', $data);
+
+            if ($insert){
+                $this->session->set_flashdata('messageperpustakaan', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/kurikulum');
+            }else{
+                $this->session->set_flashdata('messageperpustakaan', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/kurikulum');
+            }
+        }else{
+            $this->kurikulum();
         }
     }
 
@@ -653,19 +911,32 @@ class Dashboard extends CI_Controller
 
     public function update_perpustakaan()
     {
-        $idPerpustakaan = $_POST['idPerpustakaan']; 
-        $upload = $_POST['berkasPerpustakaan'];
-        $tanggal = $_POST['tanggalPerpustakaan'];
-        $keterangan = $_POST['keteranganPerpustakaan'];
+        $idPerpustakaan = $_POST['idPerpustakaan'];
+        $tanggal        = $_POST['tanggalPerpustakaan'];
+        $keterangan     = $_POST['keteranganPerpustakaan'];
         
+        $config['upload_path']          = './assets/upload/kurikulum/perpustakaan';
+        $config['allowed_types']        = 'pdf|doc|docx|xls';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['berkasPerpustakaan']))
+        {
+            $this->upload->do_upload('berkasPerpustakaan');
+            $data1 = $this->upload->data();
+            $fileeditperpus = $data1['file_name'];
+        }
+
         $data_update = array(
             'id' => $idPerpustakaan,
-            'berkas_file' => $upload,
+            'berkas_file' => $fileeditperpus,
             'tanggal_upload' => $tanggal,
             'keterangan_berkas' => $keterangan,
         );
         $where = array('id' => $idPerpustakaan);
         $res = $this->kurikulummodel->UpdateData('kurikulum_perpustakaan_sekolah', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -680,6 +951,7 @@ class Dashboard extends CI_Controller
     {
         $where = array('id' => $id);
         $res = $this->kurikulummodel->DeleteData('kurikulum_perpustakaan_sekolah', $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -708,6 +980,7 @@ class Dashboard extends CI_Controller
             'keterangan_berkas' => $keterangan,
         );
         $res = $this->kurikulummodel->InsertData('kurikulum_jurusan_tei', $data_insert);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -720,7 +993,7 @@ class Dashboard extends CI_Controller
 
     public function edit_kurikulum_jurusan_tei($id)
     {
-        $jurusan = $this->kurikulummodel->get_kurikulum_jurusan(" where id='$id'");
+        $jurusan = $this->kurikulummodel->get_kurikulum_jurusan_tei(" where id='$id'");
         $data = array(
             "id" => $jurusan[0]->id,
             "berkas_file" => $jurusan[0]->berkas_file,
@@ -747,16 +1020,29 @@ class Dashboard extends CI_Controller
     public function update_jurusan_tei()
     {
         $idJurusan = $_POST['idJurusan']; 
-        $upload = $_POST['berkasJurusan'];
         $keterangan = $_POST['keteranganJurusan'];
         
+        $config['upload_path']          = './assets/upload/kurikulum/tei';
+        $config['allowed_types']        = 'jpeg|png|jpg';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['berkasJurusan']))
+        {
+            $this->upload->do_upload('berkasJurusan');
+            $data1 = $this->upload->data();
+            $fileedittei = $data1['file_name'];
+        }
+
         $data_update = array(
             'id' => $idJurusan,
-            'berkas_file' => $upload,
+            'berkas_file' => $fileedittei,
             'keterangan_berkas' => $keterangan,
         );
         $where = array('id' => $idJurusan);
         $res = $this->kurikulummodel->UpdateData('kurikulum_jurusan_tei', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -778,6 +1064,7 @@ class Dashboard extends CI_Controller
             'keterangan_berkas' => $keterangan,
         );
         $res = $this->kurikulummodel->InsertData('kurikulum_jurusan_to', $data_insert);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -817,16 +1104,29 @@ class Dashboard extends CI_Controller
     public function update_jurusan_to()
     {
         $idJurusan = $_POST['idJurusan']; 
-        $upload = $_POST['berkasJurusan'];
         $keterangan = $_POST['keteranganJurusan'];
         
+        $config['upload_path']          = './assets/upload/kurikulum/to';
+        $config['allowed_types']        = 'jpeg|png|jpg';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['berkasJurusan']))
+        {
+            $this->upload->do_upload('berkasJurusan');
+            $data1 = $this->upload->data();
+            $fileeditto = $data1['file_name'];
+        }
+
         $data_update = array(
             'id' => $idJurusan,
-            'berkas_file' => $upload,
+            'berkas_file' => $fileeditto,
             'keterangan_berkas' => $keterangan,
         );
         $where = array('id' => $idJurusan);
         $res = $this->kurikulummodel->UpdateData('kurikulum_jurusan_to', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -848,6 +1148,7 @@ class Dashboard extends CI_Controller
             'keterangan_berkas' => $keterangan,
         );
         $res = $this->kurikulummodel->InsertData('kurikulum_jurusan_tkj', $data_insert);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -887,16 +1188,29 @@ class Dashboard extends CI_Controller
     public function update_jurusan_tkj()
     {
         $idJurusan = $_POST['idJurusan']; 
-        $upload = $_POST['berkasJurusan'];
         $keterangan = $_POST['keteranganJurusan'];
         
+        $config['upload_path']          = './assets/upload/kurikulum/tkj';
+        $config['allowed_types']        = 'jpeg|png|jpg';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['berkasJurusan']))
+        {
+            $this->upload->do_upload('berkasJurusan');
+            $data1 = $this->upload->data();
+            $fileedittkj = $data1['file_name'];
+        }
+
         $data_update = array(
             'id' => $idJurusan,
-            'berkas_file' => $upload,
+            'berkas_file' => $fileedittkj,
             'keterangan_berkas' => $keterangan,
         );
         $where = array('id' => $idJurusan);
         $res = $this->kurikulummodel->UpdateData('kurikulum_jurusan_tkj', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
@@ -946,46 +1260,70 @@ class Dashboard extends CI_Controller
 
     public function insert_kesiswaan_ekskul()
     {
-        $upload     = $_POST['uploadgambarekskul'];
-        $tanggal       = $_POST['tanggalekskul'];
-        $author        = $_POST['author'];
-        $headline      = $_POST['healinelomba'];
-        $keterangan    = $_POST['keteranganlomba'];
+        $this->form_validation->set_rules('tanggalekskul', 'Tanggal Ekskul', 'required');
+        $this->form_validation->set_rules('author', 'Author ', 'required');
+        $this->form_validation->set_rules('headlinelomba', 'Headline Lomba', 'required');
+        $this->form_validation->set_rules('keteranganlomba', 'Keterangan Lomba ', 'required');
+
+        $config['upload_path']          = './assets/upload/kesiswaan/ekskul';
+        $config['allowed_types']        = 'jpeg|png|gif|jpg';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
         
-        $data_insert = array(
-            'id' => '',
-            'upload_gambar'  => $upload,
-            'tanggal'        => $tanggal,
-            'author'         => $author,
-            'headline_lomba' => $headline,
-            'keterangan_lomba'     => $keterangan,
-        );
-        $res = $this->kesiswaanmodel->InsertData('kesiswaan_ekskul_sekolah', $data_insert);
-        if ($res >= 1) {
-            ?>
-            <script language="javascript">
-            alert("Berhasil! Data Berhasil Di input!");
-            document.location.href = "../dashboard/kesiswaan";
-            </script>
-            <?php
+        if (!empty($_FILES['uploadgambarekskul']))
+        {
+            $this->upload->do_upload('uploadgambarekskul');
+            $data1 = $this->upload->data();
+            $fileekskul = $data1['file_name'];
+        }
+
+        if ($this->form_validation->run()){
+            $tanggal        = $this->input->post('tanggalekskul', true);
+            $author         = $this->input->post('author', true);
+            $headline       = $this->input->post('headlinelomba', true);
+            $keterangan     = $this->input->post('keteranganlomba', true);
+
+            $data = [
+                'upload_gambar' => $fileekskul,
+                'tanggal' => $tanggal,
+                'author' => $author,
+                'headline_lomba' => $headline,
+                'keterangan_lomba' => $keterangan,
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+
+            $insert = $this->db->insert('kesiswaan_ekskul_sekolah', $data);
+
+            if ($insert){
+                $this->session->set_flashdata('messageekskul', '<div style="text-size: 11px;" class="alert 
+                alert-success" role="alert">Data anda berhasil dimasukkan! Silahkan cek tabel</div>');
+                redirect('dashboard/kesiswaan');
+            }else{
+                $this->session->set_flashdata('messageekskul', '<div style="text-size: 11px;" class="alert 
+                alert-danger" role="alert">Data anda gagal dimasukkan! Silahkan coba lagi</div>');
+                redirect('dashboard/kesiswaan');
+            }
+        }else{
+            $this->kesiswaan();
         }
     }
 
     public function edit_kesiswaan_ekskul($id)
     {
-        $kesiswaan = $this->kesiswaanmodel->get_kesiswaan_ekskul_sekolah()(" where id='$id'");
+        $kesiswaan = $this->kesiswaanmodel->get_kesiswaan_ekskul_sekolah(" where id='$id'");
         $data = array(
             "id" => $kesiswaan[0]->id,
             "upload_gambar" => $kesiswaan[0]->upload_gambar,
             "tanggal" => $kesiswaan[0]->tanggal,
             "author" => $kesiswaan[0]->author,
             "headline_lomba" => $kesiswaan[0]->headline_lomba,
-            "keterangan" => $kesiswaan[0]->keterangan,
+            "keterangan_lomba" => $kesiswaan[0]->keterangan_lomba,
         );
         
         $data['headline'] = "Edit Pengembangan Diri";
         $data['title'] = "Form Master Edit Pengembangan Diri";
-        $data['url'] = "dashboard/update_kesiswaan";
+        $data['url'] = "dashboard/update_kesiswaan_ekskul";
         
         $data['judul'] = 'Edit Pengembangan Diri | SMKN 1 PEBAYURAN';
         $data['user'] = $this->db->get_where('pebayuran_admin', ['email' =>
@@ -1002,24 +1340,64 @@ class Dashboard extends CI_Controller
 
     public function update_kesiswaan_ekskul()
     {
-        $idAdministrasi = $_POST['idAdministrasi']; 
-        $upload = $_POST['berkasAdministrasi'];
-        $tanggal = $_POST['tanggalAdministrasi'];
-        $keterangan = $_POST['keteranganAdministrasi'];
+        $idEkskul   = $_POST['idEkskul']; 
+        $tanggal    = $_POST['edittanggalEkskul'];
+        $author     = $_POST['editauthor'];
+        $headline   = $_POST['editheadline'];
+        $keterangan = $_POST['editketeranganEkskul'];
+
+        $config['upload_path']          = './assets/upload/kesiswaan/';
+        $config['allowed_types']        = 'jpeg|png|gif|jpg';
+        $config['max_size']             = 10000;
+
+        $this->load->library('upload', $config);
+        
+        if (!empty($_FILES['edituploadgambarekskul']))
+        {
+            $this->upload->do_upload('edituploadgambarekskul');
+            $data1 = $this->upload->data();
+            $fileeditekskul = $data1['file_name'];
+        }
         
         $data_update = array(
-            'id' => $idAdministrasi,
-            'berkas_file' => $upload,
-            'tanggal_upload' => $tanggal,
-            'keterangan_berkas' => $keterangan,
+            'id' => $idEkskul,
+            'upload_gambar' => $fileeditekskul,
+            'tanggal' => $tanggal,
+            'author' => $author,
+            'headline_lomba' => $headline,
+            'keterangan_lomba' => $keterangan,
+            'created_at' => date('Y-m-d H:i:s'),
         );
-        $where = array('id' => $idAdministrasi);
-        $res = $this->kurikulummodel->UpdateData('kurikulum_administrasi_guru', $data_update, $where);
+        $where = array('id' => $idEkskul);
+        $res = $this->kurikulummodel->UpdateData('kesiswaan_ekskul_sekolah', $data_update, $where);
+        
         if ($res >= 1) {
             ?>
             <script language="javascript">
             alert('Horeee, Data Anda Berhasil di Update');
-            document.location.href = "<?= base_url('dashboard/kurikulum') ?>";
+            document.location.href = "<?= base_url('dashboard/kesiswaan') ?>";
+            </script>
+            <?php
+        }
+    }
+
+    public function hapus_kesiswaan_ekskul($id)
+    {
+        $where = array('id' => $id);
+        $res = $this->kurikulummodel->DeleteData('kesiswaan_ekskul_sekolah', $where);
+        
+        if ($res >= 1) {
+            ?>
+            <script language="javascript">
+            alert('Horeee, Data Anda Berhasil di Hapus');
+            document.location.href = "<?= base_url('dashboard/kesiswaan') ?>";
+            </script>
+            <?php
+        } else {
+            ?>
+            <script language="javascript">
+            alert('Maaf, Data Anda Gagal di Hapus');
+            document.location.href = "<?= base_url('dashboard/kesiswaan') ?>";
             </script>
             <?php
         }

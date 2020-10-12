@@ -12,14 +12,6 @@
     <div class="py-2 bg-light">
         <div class="container">
             <div class="row align-items-center">
-                <!-- <div class="col-lg-9 d-none d-lg-block">
-                    <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Pertanyaan?</a>
-                    <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> 10 20 123 456</a>
-                    <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span>info@smkn1pebayuran.com</a>
-                </div>
-                <div class="col-lg-3 text-right">
-                    <a href="auth" class="small mr-3"><span class="icon-unlock-alt"></span> Masuk</a>
-                </div> -->
             </div>
         </div>
     </div>
@@ -51,7 +43,7 @@
                                 <a href="" class="nav-link text-left">Kurikulum</a>
                                 <ul class="dropdown">
                                     <li><a href="<?= base_url('administrasi'); ?>">Administrasi Guru</a></li>
-                                    <li><a href="#">Penilaian</a></li>
+                                    <li><a href="http://raportku.smknsatupebayuran.sch.id/" target="_blank">Penilaian</a></li>
                                     <li><a href="<?= base_url('perpustakaan'); ?>">Perpustakaan</a></li>
                                     <li><a href="<?= base_url('elektronika'); ?>">Teknik Elektronika Industri</a></li>
                                     <li><a href="<?= base_url('ototronik'); ?>">Teknik Ototronik</a></li>
@@ -68,7 +60,7 @@
                             <li class="has-children">
                                 <a href="" class="nav-link text-left">Hubin</a>
                                 <ul class="dropdown">
-                                    <li><a href="<?= base_url('mitra'); ?>">Daftar Mitra Industri</a></li>
+                                    <li><a href="#">Daftar Mitra Industri</a></li>
                                     <li><a href="#">PKL</a></li>
                                     <li><a href="#">Bursa Kerja Khusus</a></li>
                                     <li><a href="#">Pemanfaatan Alumni</a></li>

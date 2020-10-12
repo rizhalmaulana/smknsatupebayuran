@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="panel-body" style="padding-bottom:30px;">
                                     <!-- Tabel Input Struktur -->
-                                    <form method="POST" action="<?= base_url() . $url; ?>">
+                                    <?= form_open_multipart($url); ?>
                                         <div class="form-element">
                                             <div class="col-md-12 padding-0">
                                                 <div class="col-md-12">
@@ -39,13 +39,10 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label
-                                                                        class="col-sm-2 control-label text-right">Berkas
-                                                                        File</label>
+                                                                        class="col-sm-2 control-label text-right">Berkas File</label>
                                                                     <div class="col-sm-10">
-                                                                        <input type="file" class="form-control"
-                                                                            name="berkasPerpustakaan"
-                                                                            value="<?= $berkas_file; ?>"
-                                                                            autocomplete="off">
+                                                                        <input type="file" class="form-control" name="berkasPerpustakaan" value="<?= $berkas_file; ?>" autocomplete="off">
+                                                                        <label class="control-label">*Ukuran Maksimal  2MB *pdf/doc/docx/xls </label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
@@ -84,7 +81,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                    </form>
+                                        <?= form_close(); ?>
                                     <!-- Tabel Input Struktur -->
                                 </div>
                             </div>
