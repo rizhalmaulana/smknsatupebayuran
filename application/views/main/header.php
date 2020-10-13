@@ -14,8 +14,7 @@
 
     <!-- plugins -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css"
-        href="<?= base_url('assets/'); ?>primary/css/plugins/simple-line-icons.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/simple-line-icons.css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/animate.min.css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>primary/css/plugins/fullcalendar.min.css" />
     <link href="<?= base_url('assets/'); ?>primary/css/style.css" rel="stylesheet">

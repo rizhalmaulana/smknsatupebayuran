@@ -28,13 +28,13 @@ class Dashboard extends CI_Controller
         $this->session->userdata('email')])->row_array();
         $data['judul'] = "Dashboard | SMKN 1 PEBAYURAN";
         
-        $this->load->view('primary/header', $data);
-        $this->load->view('primary/topbar', $data);
-        $this->load->view('primary/sidebar');
-        $this->load->view('primary/rightbar');
-        $this->load->view('primary/mobile');
+        $this->load->view('main/header', $data);
+        $this->load->view('main/topbar', $data);
+        $this->load->view('main/sidebar');
+        $this->load->view('main/rightbar');
+        $this->load->view('main/mobile');
         $this->load->view('dashboard/index', $data);
-        $this->load->view('primary/footer');
+        $this->load->view('main/footer');
     }
     
     // FUNCTION PROFIL
